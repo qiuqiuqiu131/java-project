@@ -1,10 +1,11 @@
-import Manager.InputManager;
-import Manager.PanelManager;
+import Manager.IInputManager;
+import Manager.IPanelManager;
+import Tool.MyAcrchitecture;
 
 public class SaleManagerSystem {
     public static void main(String[] args) throws Exception {
-        InputManager inputmgr = InputManager.Instance();
-        PanelManager panelmgr = PanelManager.Instance();
+        IInputManager inputmgr = MyAcrchitecture.Instance().GetController(IInputManager.class);
+        IPanelManager panelmgr = MyAcrchitecture.Instance().GetController(IPanelManager.class);
 
         while (true) {
             /* 显示当前界面 */
@@ -29,8 +30,6 @@ public class SaleManagerSystem {
                     break;
                 }
             }
-
         }
-
     }
 }

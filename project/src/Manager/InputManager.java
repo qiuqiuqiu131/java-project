@@ -2,24 +2,26 @@ package Manager;
 
 import java.util.Scanner;
 
-public class InputManager {
-    private static InputManager _instance;
+import Tool.framework.AbstractController;
+
+public class InputManager extends AbstractController implements IInputManager {
     private Scanner scanner;
 
-    public static InputManager Instance() {
-        if (_instance == null)
-            _instance = new InputManager();
-        return _instance;
-    }
-
-    private InputManager() {
+    public InputManager() {
         scanner = new Scanner(System.in);
     }
 
+    @Override
+    protected void OnInit() {
+
+    }
+
+    @Override
     public String GetInputLine() {
         return scanner.nextLine();
     }
 
+    @Override
     public String GetInput() {
         return scanner.next();
     }

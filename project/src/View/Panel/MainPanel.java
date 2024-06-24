@@ -3,7 +3,7 @@ package View.Panel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import Manager.PanelManager;
+import Manager.IPanelManager;
 import View.PanelType;
 
 public class MainPanel extends BasePanel {
@@ -18,19 +18,19 @@ public class MainPanel extends BasePanel {
     @SuppressWarnings("unused")
     private void Command1() {
         System.out.println("\n切换到管理界面");
-        PanelManager.Instance().OpenPanel(PanelType.SystemManagerPanel);
+        this.GetController(IPanelManager.class).OpenPanel(PanelType.SystemManagerPanel);
     }
 
     @SuppressWarnings("unused")
     private void Command2() {
         System.out.println("\n切换到用户登录界面");
-        PanelManager.Instance().OpenPanel(PanelType.ClientLogPanel);
+        this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientLogPanel);
     }
 
     @SuppressWarnings("unused")
     private void Command3() {
         System.out.println("\n切换到销售登录界面");
-        PanelManager.Instance().OpenPanel(PanelType.SalerLogPanel);
+        this.GetController(IPanelManager.class).OpenPanel(PanelType.SalerLogPanel);
     }
 
     public void Back() {

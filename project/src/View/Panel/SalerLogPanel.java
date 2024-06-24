@@ -3,8 +3,8 @@ package View.Panel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import Manager.InputManager;
-import Manager.PanelManager;
+import Manager.IInputManager;
+import Manager.IPanelManager;
 import View.PanelType;
 
 public class SalerLogPanel extends BasePanel {
@@ -20,7 +20,7 @@ public class SalerLogPanel extends BasePanel {
         String clientName;
         String clientPassword;
 
-        InputManager inputmgr = InputManager.Instance();
+        IInputManager inputmgr = this.GetController(IInputManager.class);
         System.out.print("用户名: ");
         clientName = inputmgr.GetInputLine();
         System.out.print("密码: ");
@@ -34,8 +34,8 @@ public class SalerLogPanel extends BasePanel {
         // 假如成功
         System.out.println("\n登录成功");
         System.out.println("切换到用户界面");
-        PanelManager.Instance().ClosePanel();
-        PanelManager.Instance().OpenPanel(PanelType.SalerPanel);
+        this.GetController(IPanelManager.class).ClosePanel();
+        this.GetController(IPanelManager.class).OpenPanel(PanelType.SalerPanel);
     }
 
     @SuppressWarnings("unused")
@@ -43,7 +43,7 @@ public class SalerLogPanel extends BasePanel {
         String clientName;
         String clientPassword;
 
-        InputManager inputmgr = InputManager.Instance();
+        IInputManager inputmgr = this.GetController(IInputManager.class);
         System.out.print("用户名: ");
         clientName = inputmgr.GetInputLine();
         System.out.print("密码: ");
@@ -57,7 +57,7 @@ public class SalerLogPanel extends BasePanel {
         // 假如成功
         System.out.println("\n注册成功");
         System.out.println("切换到销售员界面");
-        PanelManager.Instance().ClosePanel();
-        PanelManager.Instance().OpenPanel(PanelType.SalerPanel);
+        this.GetController(IPanelManager.class).ClosePanel();
+        this.GetController(IPanelManager.class).OpenPanel(PanelType.SalerPanel);
     }
 }

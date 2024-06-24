@@ -5,25 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+import Tool.framework.AbstractController;
 import View.PanelType;
 import View.Panel.BasePanel;
 
-public class PanelManager {
-
-    private static PanelManager _instance;
+public class PanelManager extends AbstractController implements IPanelManager {
 
     private Map<PanelType, BasePanel> panelDic;
     private Stack<PanelType> panelStack;
 
-    public static PanelManager Instance() {
-        if (_instance == null) {
-            _instance = new PanelManager();
-            _instance.OpenPanel(PanelType.MainPanel);
-        }
-        return _instance;
-    }
-
-    private PanelManager() {
+    public PanelManager() {
         // 初始化面板map
         panelDic = new HashMap<PanelType, BasePanel>();
         String panelPackName = BasePanel.class.getName().replace("BasePanel", "");
@@ -46,14 +37,22 @@ public class PanelManager {
         panelStack = new Stack<PanelType>();
     }
 
+    @Override
+    protected void OnInit() {
+        OpenPanel(PanelType.MainPanel);
+    }
+
+    @Override
     public void OpenPanel(PanelType type) {
         panelStack.push(type);
     }
 
+    @Override
     public void ClosePanel() {
         panelStack.pop();
     }
 
+    @Override
     public BasePanel CurrPanel() {
         return panelDic.get(panelStack.peek());
     }

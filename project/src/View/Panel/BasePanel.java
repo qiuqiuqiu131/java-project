@@ -3,9 +3,10 @@ package View.Panel;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import Manager.PanelManager;
+import Manager.IPanelManager;
+import Tool.framework.AbstractView;
 
-public class BasePanel {
+public class BasePanel extends AbstractView {
     protected String panelName;
     protected List<String> commandList;
 
@@ -62,7 +63,11 @@ public class BasePanel {
     }
 
     public void Back() {
-        PanelManager.Instance().ClosePanel();
+        this.GetController(IPanelManager.class).ClosePanel();
         System.out.println("\n返回");
+    }
+
+    @Override
+    protected void OnInit() {
     }
 }

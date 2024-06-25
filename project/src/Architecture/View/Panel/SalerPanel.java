@@ -1,4 +1,4 @@
-package View.Panel;
+package Architecture.View.Panel;
 
 import java.util.ArrayList;
 import java.util.Arrays;

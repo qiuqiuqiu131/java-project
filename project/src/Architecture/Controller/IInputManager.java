@@ -1,4 +1,4 @@
-package Manager;
+package Architecture.Controller;
 
 import Tool.framework.Interface.IController;
 

@@ -1,11 +1,11 @@
-package View.Panel;
+package Architecture.View.Panel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import Command.ClientLoginCommand;
-import Command.ClientRegisterCommand;
-import Controller.IInputManager;
+import Architecture.Command.ClientLoginCommand;
+import Architecture.Command.ClientRegisterCommand;
+import Architecture.Controller.IInputManager;
 
 public class ClientLogPanel extends BasePanel {
     public ClientLogPanel() {

@@ -1,6 +1,6 @@
-import Manager.IInputManager;
-import Manager.IPanelManager;
-import Tool.MyAcrchitecture;
+import Architecture.MyAcrchitecture;
+import Architecture.Controller.IInputManager;
+import Architecture.Controller.IPanelManager;
 
 public class SaleManagerSystem {
     public static void main(String[] args) throws Exception {

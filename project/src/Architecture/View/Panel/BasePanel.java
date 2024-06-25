@@ -1,11 +1,11 @@
-package View.Panel;
+package Architecture.View.Panel;
 
 import java.lang.reflect.Method;
 import java.util.List;
 
-import Manager.IInputManager;
-import Manager.IPanelManager;
-import Manager.PrintGrade;
+import Architecture.Controller.IInputManager;
+import Architecture.Controller.IPanelManager;
+import Architecture.Controller.PrintGrade;
 import Tool.framework.Abstract.AbstractView;
 
 public class BasePanel extends AbstractView {

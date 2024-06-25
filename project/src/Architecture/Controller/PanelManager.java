@@ -1,13 +1,13 @@
-package Manager;
+package Architecture.Controller;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+import Architecture.View.PanelType;
+import Architecture.View.Panel.BasePanel;
 import Tool.framework.Abstract.AbstractController;
-import View.PanelType;
-import View.Panel.BasePanel;
 
 public class PanelManager extends AbstractController implements IPanelManager {
     private Map<PanelType, BasePanel> panelDic;

@@ -1,4 +1,4 @@
-package View;
+package Architecture.View;
 
 public enum PanelType {
     MainPanel,

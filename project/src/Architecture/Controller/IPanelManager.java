@@ -1,8 +1,8 @@
-package Manager;
+package Architecture.Controller;
 
+import Architecture.View.PanelType;
+import Architecture.View.Panel.BasePanel;
 import Tool.framework.Interface.IController;
-import View.PanelType;
-import View.Panel.BasePanel;
 
 public interface IPanelManager extends IController {
     public void OpenPanel(PanelType type);

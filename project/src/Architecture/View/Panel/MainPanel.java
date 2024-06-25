@@ -1,10 +1,10 @@
-package View.Panel;
+package Architecture.View.Panel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import Manager.IPanelManager;
-import View.PanelType;
+import Architecture.Controller.IPanelManager;
+import Architecture.View.PanelType;
 
 public class MainPanel extends BasePanel {
     public MainPanel() {

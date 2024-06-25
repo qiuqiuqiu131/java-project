@@ -1,4 +1,4 @@
-package Manager;
+package Architecture.Controller;
 
 public enum PrintGrade {
     Execute, // 执行结果

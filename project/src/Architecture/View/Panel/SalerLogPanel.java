@@ -1,11 +1,11 @@
-package View.Panel;
+package Architecture.View.Panel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import Command.SalerLoginCommand;
-import Command.SalerRegisterCommand;
-import Manager.IInputManager;
+import Architecture.Command.SalerLoginCommand;
+import Architecture.Command.SalerRegisterCommand;
+import Architecture.Controller.IInputManager;
 
 public class SalerLogPanel extends BasePanel {
     public SalerLogPanel() {

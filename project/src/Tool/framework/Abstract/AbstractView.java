@@ -1,6 +1,6 @@
 package Tool.framework.Abstract;
 
-import Tool.MyAcrchitecture;
+import Architecture.MyAcrchitecture;
 import Tool.framework.Interface.IView;
 
 public abstract class AbstractView implements IView {

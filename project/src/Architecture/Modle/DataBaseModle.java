@@ -1,6 +1,6 @@
 package Architecture.Modle;
 
-import Database.DBConnection;
+import Tool.Database.DBConnection;
 import Tool.framework.Abstract.AbstractModle;
 
 public class DataBaseModle extends AbstractModle implements IDataBaseModle {

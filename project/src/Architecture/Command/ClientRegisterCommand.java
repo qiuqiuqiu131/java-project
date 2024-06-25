@@ -1,10 +1,10 @@
-package Command;
+package Architecture.Command;
 
-import Manager.IInputManager;
-import Manager.IPanelManager;
-import Manager.PrintGrade;
+import Architecture.Controller.IInputManager;
+import Architecture.Controller.IPanelManager;
+import Architecture.Controller.PrintGrade;
+import Architecture.View.PanelType;
 import Tool.framework.Abstract.AbstractCommand;
-import View.PanelType;
 
 public class ClientRegisterCommand extends AbstractCommand {
     public String Name;

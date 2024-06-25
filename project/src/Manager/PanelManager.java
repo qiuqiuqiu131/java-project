@@ -44,6 +44,9 @@ public class PanelManager extends AbstractController implements IPanelManager {
     @Override
     public void OpenPanel(PanelType type) {
         panelStack.push(type);
+
+        String mess = "转到" + CurrPanel().panelName;
+        this.GetController(IInputManager.class).PrintLine(PrintGrade.Execute, mess);
     }
 
     @Override

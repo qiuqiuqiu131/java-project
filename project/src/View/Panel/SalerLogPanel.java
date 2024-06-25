@@ -3,9 +3,9 @@ package View.Panel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import Command.SalerLoginCommand;
+import Command.SalerRegisterCommand;
 import Manager.IInputManager;
-import Manager.IPanelManager;
-import View.PanelType;
 
 public class SalerLogPanel extends BasePanel {
     public SalerLogPanel() {
@@ -26,16 +26,7 @@ public class SalerLogPanel extends BasePanel {
         System.out.print("密码: ");
         clientPassword = inputmgr.GetInputLine();
 
-        /*
-         * TODO:
-         * 发送登录请求
-         */
-
-        // 假如成功
-        System.out.println("\n登录成功");
-        System.out.println("切换到用户界面");
-        this.GetController(IPanelManager.class).ClosePanel();
-        this.GetController(IPanelManager.class).OpenPanel(PanelType.SalerPanel);
+        this.SendCommand(new SalerLoginCommand(clientName, clientPassword));
     }
 
     @SuppressWarnings("unused")
@@ -49,15 +40,6 @@ public class SalerLogPanel extends BasePanel {
         System.out.print("密码: ");
         clientPassword = inputmgr.GetInputLine();
 
-        /*
-         * TODO:
-         * 发送注册请求
-         */
-
-        // 假如成功
-        System.out.println("\n注册成功");
-        System.out.println("切换到销售员界面");
-        this.GetController(IPanelManager.class).ClosePanel();
-        this.GetController(IPanelManager.class).OpenPanel(PanelType.SalerPanel);
+        this.SendCommand(new SalerRegisterCommand(clientName, clientPassword));
     }
 }

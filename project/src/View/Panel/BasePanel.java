@@ -3,11 +3,13 @@ package View.Panel;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import Manager.IInputManager;
 import Manager.IPanelManager;
+import Manager.PrintGrade;
 import Tool.framework.Abstract.AbstractView;
 
 public class BasePanel extends AbstractView {
-    protected String panelName;
+    public String panelName;
     protected List<String> commandList;
 
     /**
@@ -64,8 +66,8 @@ public class BasePanel extends AbstractView {
     }
 
     public void Back() {
+        this.GetController(IInputManager.class).PrintLine(PrintGrade.Execute, "界面返回");
         this.GetController(IPanelManager.class).ClosePanel();
-        System.out.println("\n返回");
     }
 
     @Override

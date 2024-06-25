@@ -6,11 +6,11 @@ import Manager.PrintGrade;
 import Tool.framework.Abstract.AbstractCommand;
 import View.PanelType;
 
-public class ClientRegisterCommand extends AbstractCommand {
+public class ClientLoginCommand extends AbstractCommand {
     public String Name;
     public String Password;
 
-    public ClientRegisterCommand(String Name, String Password) {
+    public ClientLoginCommand(String Name, String Password) {
         this.Name = Name;
         this.Password = Password;
     }
@@ -18,9 +18,8 @@ public class ClientRegisterCommand extends AbstractCommand {
     @Override
     protected void OnExecute() {
         IInputManager inputMgr = this.GetController(IInputManager.class);
-        inputMgr.PrintLine(PrintGrade.Imforation, "客户注册成功");
+        inputMgr.PrintLine(PrintGrade.Imforation, "客户登录成功");
         this.GetController(IPanelManager.class).ClosePanel();
         this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientPanel);
     }
-
 }

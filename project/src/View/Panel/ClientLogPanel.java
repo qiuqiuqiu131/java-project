@@ -3,10 +3,9 @@ package View.Panel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import Command.ClientLoginCommand;
 import Command.ClientRegisterCommand;
 import Manager.IInputManager;
-import Manager.IPanelManager;
-import View.PanelType;
 
 public class ClientLogPanel extends BasePanel {
     public ClientLogPanel() {
@@ -27,16 +26,7 @@ public class ClientLogPanel extends BasePanel {
         System.out.print("密码: ");
         clientPassword = inputmgr.GetInputLine();
 
-        /*
-         * TODO:
-         * 发送登录请求
-         */
-
-        // 假如成功
-        System.out.println("\n登录成功");
-        System.out.println("切换到用户界面");
-        this.GetController(IPanelManager.class).ClosePanel();
-        this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientPanel);
+        this.SendCommand(new ClientLoginCommand(clientName, clientPassword));
     }
 
     @SuppressWarnings("unused")
@@ -50,12 +40,6 @@ public class ClientLogPanel extends BasePanel {
         System.out.print("密码: ");
         clientPassword = inputmgr.GetInputLine();
 
-        /*
-         * TODO:
-         * 发送注册请求
-         */
-
-        // 假如成功
         this.SendCommand(new ClientRegisterCommand(clientName, clientPassword));
     }
 }

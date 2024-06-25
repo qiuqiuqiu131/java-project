@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 import Tool.framework.Abstract.AbstractController;
 
+/**
+ * 控制台输入输出控制器
+ */
 public class InputManager extends AbstractController implements IInputManager {
     private Scanner scanner;
     private Map<PrintGrade, String> tips;

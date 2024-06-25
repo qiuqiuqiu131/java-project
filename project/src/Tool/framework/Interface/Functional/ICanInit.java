@@ -10,7 +10,7 @@ public interface ICanInit {
     boolean Initialize();
 
     /**
-     * 一般模块中事件的订阅都会在此函数中实现
+     * 模块中,事件的订阅都会在此函数中实现
      */
     void Init();
 

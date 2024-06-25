@@ -15,7 +15,7 @@ import Tool.framework.Abstract.AbstractView;
  * 
  * 功能函数的命名规则:
  * 1、当前有n个功能,就要对应的写n个功能函数
- * 2、如当前需要编写第2个功能的功能函数,那么函数的命名为"private void Command2(){}";
+ * 2、如当前需要编写第2个功能的功能函数,那么函数的命名为"private void Command2(){}"
  */
 public class BasePanel extends AbstractView {
     public String panelName;

@@ -6,6 +6,9 @@ import Architecture.Controller.PrintGrade;
 import Architecture.View.PanelType;
 import Tool.framework.Abstract.AbstractCommand;
 
+/**
+ * 销售员登录命令
+ */
 public class SalerLoginCommand extends AbstractCommand {
     public String Name;
     public String Password;

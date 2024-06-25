@@ -6,6 +6,9 @@ import Architecture.Controller.PrintGrade;
 import Architecture.View.PanelType;
 import Tool.framework.Abstract.AbstractCommand;
 
+/**
+ * 客户注册命令
+ */
 public class ClientRegisterCommand extends AbstractCommand {
     public String Name;
     public String Password;

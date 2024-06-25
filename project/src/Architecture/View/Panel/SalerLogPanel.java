@@ -7,6 +7,9 @@ import Architecture.Command.SalerLoginCommand;
 import Architecture.Command.SalerRegisterCommand;
 import Architecture.Controller.IInputManager;
 
+/**
+ * 销售员登录面板
+ */
 public class SalerLogPanel extends BasePanel {
     public SalerLogPanel() {
         panelName = "销售员登录界面";

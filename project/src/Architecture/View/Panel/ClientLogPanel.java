@@ -7,6 +7,9 @@ import Architecture.Command.ClientLoginCommand;
 import Architecture.Command.ClientRegisterCommand;
 import Architecture.Controller.IInputManager;
 
+/**
+ * 客户登录面板
+ */
 public class ClientLogPanel extends BasePanel {
     public ClientLogPanel() {
         panelName = "客户登录界面";
@@ -15,6 +18,9 @@ public class ClientLogPanel extends BasePanel {
                 "注册"));
     }
 
+    /**
+     * 用户登录
+     */
     @SuppressWarnings("unused")
     private void Command1() {
         String clientName;
@@ -29,6 +35,9 @@ public class ClientLogPanel extends BasePanel {
         this.SendCommand(new ClientLoginCommand(clientName, clientPassword));
     }
 
+    /**
+     * 用户注册
+     */
     @SuppressWarnings("unused")
     private void Command2() {
         String clientName;

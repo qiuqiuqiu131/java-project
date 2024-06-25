@@ -6,6 +6,9 @@ import java.util.Arrays;
 import Architecture.Controller.IPanelManager;
 import Architecture.View.PanelType;
 
+/**
+ * 主面板
+ */
 public class MainPanel extends BasePanel {
     public MainPanel() {
         panelName = "主界面";

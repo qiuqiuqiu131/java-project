@@ -9,12 +9,18 @@ import Architecture.View.PanelType;
 import Architecture.View.Panel.BasePanel;
 import Tool.framework.Abstract.AbstractController;
 
+/**
+ * 面板控制器
+ */
 public class PanelManager extends AbstractController implements IPanelManager {
+    /* 储存面板枚举和面板实例的对应关系，方便存取 */
     private Map<PanelType, BasePanel> panelDic;
+
+    /* 储存了打开的面板的信息，采用栈的方式存取 */
     private Stack<PanelType> panelStack;
 
     public PanelManager() {
-        // 初始化面板map
+        /* 初始化面板Map ,使用反射的方式,将通过枚举获取对应的面板类，并实例化 */
         panelDic = new HashMap<PanelType, BasePanel>();
         String panelPackName = BasePanel.class.getName().replace("BasePanel", "");
         for (PanelType panelType : PanelType.values()) {
@@ -32,7 +38,7 @@ public class PanelManager extends AbstractController implements IPanelManager {
             panelDic.put(panelType, panel);
         }
 
-        // 初始化面板栈
+        /* 初始化面板栈 */
         panelStack = new Stack<PanelType>();
     }
 

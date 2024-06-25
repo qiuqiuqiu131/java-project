@@ -9,9 +9,18 @@ import Tool.framework.Interface.IController;
 import Tool.framework.Interface.IModle;
 import Tool.framework.Interface.IResCommand;
 
+/**
+ * 框架虚基类
+ * 当需要设置一个项目的框架时必须继承自此基类
+ * 同时,继承此基类的框架必须写成单例模式，方便View层获取框架对象
+ * 
+ * @author 洪秋阳
+ */
 public abstract class AbstractArchitecture implements IArchitecture {
     private boolean mInited = false;
+    /* 控制反转容器 */
     private IOCContainer mContainer;
+    /* 事件系统 */
     private EventSystem mEventSystem;
 
     public AbstractArchitecture() {
@@ -22,6 +31,18 @@ public abstract class AbstractArchitecture implements IArchitecture {
         mInited = true;
     }
 
+    /**
+     * 虚函数,子类必须实现此初始化函数
+     * 子类需要将框架中需要使用到的模块在这个函数中注册
+     * 
+     * 示例：
+     * {@code
+     * protected void Init(){
+     *    this.RegisterController(IUIController.class,new UIController());
+     *    this.RegisterModle(IClientModle.class,new ClientModle());
+     * }
+     * }
+     */
     protected abstract void Init();
 
     public void Deinit() {

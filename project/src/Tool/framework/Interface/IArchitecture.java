@@ -13,7 +13,9 @@ public interface IArchitecture {
 
     <T> void SendEvent(Class<T> clz, T obj);
 
-    <T> void SendEvent(Class<T> clz);
+    <T> void SendEvent(T obj);
 
     <T> void RegisterEvent(Class<T> clz, IEventListener<T> listener);
+
+    <T> void UnRegisterEvent(Class<T> clz, IEventListener<T> listener);
 }

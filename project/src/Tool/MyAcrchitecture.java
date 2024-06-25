@@ -25,5 +25,4 @@ public class MyAcrchitecture extends AbstractArchitecture {
         this.RegisterController(IPanelManager.class, new PanelManager());
         this.RegisterController(IInputManager.class, new InputManager());
     }
-
 }

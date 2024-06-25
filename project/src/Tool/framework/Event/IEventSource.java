@@ -1,4 +1,4 @@
-package tool;
+package Tool.framework.Event;
 
 public interface IEventSource<T> {
     void Trigger(T obj);

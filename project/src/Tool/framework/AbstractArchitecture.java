@@ -1,5 +1,6 @@
 package Tool.framework;
 
+import Tool.framework.Event.Events;
 import Tool.framework.Event.IEventListener;
 import Tool.framework.Interface.IArchitecture;
 import Tool.framework.Interface.IController;
@@ -8,8 +9,10 @@ import Tool.framework.Interface.IModle;
 public abstract class AbstractArchitecture implements IArchitecture {
     private boolean mInited = false;
     private IOCContainer mContainer;
+    private Events mEvents;
 
     public AbstractArchitecture() {
+        mEvents = new Events();
         mContainer = new IOCContainer();
         Init();
         mContainer.Init();
@@ -57,14 +60,18 @@ public abstract class AbstractArchitecture implements IArchitecture {
 
     /* 事件 */
     public <T> void SendEvent(Class<T> clz, T obj) {
-
+        mEvents.Trigger(clz, obj);
     }
 
-    public <T> void SendEvent(Class<T> clz) {
-
+    public <T> void SendEvent(T obj) {
+        mEvents.Trigger(obj);
     }
 
     public <T> void RegisterEvent(Class<T> clz, IEventListener<T> listener) {
+        mEvents.Register(clz, listener);
+    }
 
+    public <T> void UnRegisterEvent(Class<T> clz, IEventListener<T> listener) {
+        mEvents.Unregister(clz, listener);
     }
 }

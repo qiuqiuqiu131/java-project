@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import Manager.IPanelManager;
-import Tool.framework.AbstractView;
+import Tool.framework.Abstract.AbstractView;
 
 public class BasePanel extends AbstractView {
     protected String panelName;
@@ -17,8 +17,9 @@ public class BasePanel extends AbstractView {
      */
     public int ShowView() {
         System.out.println("");
-        System.out.println("————————————————");
+        System.out.println("**********");
         System.out.println(panelName);
+        System.out.println("--------------------");
         int count = 0;
         for (String s : commandList) {
             count++;
@@ -26,7 +27,7 @@ public class BasePanel extends AbstractView {
         }
         count++;
         System.err.println(count + ". 返回");
-        System.out.println("————————————————");
+        System.out.println("--------------------");
         return count;
     }
 

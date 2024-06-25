@@ -4,6 +4,7 @@ public interface IView
         extends
         IGetController,
         ICanRegisterEvent,
+        ICanSendCommand,
         IGetModle {
 
 }

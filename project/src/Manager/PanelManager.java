@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-import Tool.framework.AbstractController;
+import Tool.framework.Abstract.AbstractController;
 import View.PanelType;
 import View.Panel.BasePanel;
 

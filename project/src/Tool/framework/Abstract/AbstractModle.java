@@ -1,9 +1,9 @@
-package Tool.framework;
+package Tool.framework.Abstract;
 
 import Tool.framework.Interface.IArchitecture;
-import Tool.framework.Interface.IController;
+import Tool.framework.Interface.IModle;
 
-public abstract class AbstractController implements IController {
+public abstract class AbstractModle implements IModle {
     private IArchitecture mArchitexture;
     private boolean Initialized;
 
@@ -25,7 +25,6 @@ public abstract class AbstractController implements IController {
     @Override
     public void Init() {
         Initialized = true;
-        OnInit();
     }
 
     @Override

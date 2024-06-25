@@ -1,5 +1,6 @@
-package Tool.framework;
+package Tool.framework.Abstract;
 
+import Tool.framework.IOCContainer;
 import Tool.framework.Event.EventSystem;
 import Tool.framework.Event.IEventListener;
 import Tool.framework.Interface.IArchitecture;

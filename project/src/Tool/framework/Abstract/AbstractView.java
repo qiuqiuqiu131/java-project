@@ -1,4 +1,4 @@
-package Tool.framework;
+package Tool.framework.Abstract;
 
 import Tool.MyAcrchitecture;
 import Tool.framework.Interface.IView;

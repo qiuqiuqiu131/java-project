@@ -4,7 +4,7 @@ import Manager.IInputManager;
 import Manager.IPanelManager;
 import Manager.InputManager;
 import Manager.PanelManager;
-import Tool.framework.AbstractArchitecture;
+import Tool.framework.Abstract.AbstractArchitecture;
 
 public class MyAcrchitecture extends AbstractArchitecture {
 

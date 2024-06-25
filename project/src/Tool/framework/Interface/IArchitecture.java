@@ -25,5 +25,5 @@ public interface IArchitecture {
     /* 命令 */
     <T extends ICommand> void SendCommand(T com);
 
-    <T> T SendCommand(IResCommand com);
+    <T> T SendCommand(IResCommand<T> com);
 }

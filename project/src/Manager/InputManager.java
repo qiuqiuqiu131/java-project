@@ -1,14 +1,22 @@
 package Manager;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
-import Tool.framework.AbstractController;
+import Tool.framework.Abstract.AbstractController;
 
 public class InputManager extends AbstractController implements IInputManager {
     private Scanner scanner;
+    private Map<PrintGrade, String> tips;
 
     public InputManager() {
         scanner = new Scanner(System.in);
+
+        tips = new HashMap<PrintGrade, String>();
+        tips.put(PrintGrade.Error, "错误: ");
+        tips.put(PrintGrade.Execute, "执行: ");
+        tips.put(PrintGrade.Imforation, "消息: ");
     }
 
     @Override
@@ -25,4 +33,19 @@ public class InputManager extends AbstractController implements IInputManager {
     public String GetInput() {
         return scanner.next();
     }
+
+    @Override
+    public void PrintLine(PrintGrade printGrade, String mess) {
+        Space();
+        String res = tips.get(printGrade) + mess;
+        System.out.println(res);
+    }
+
+    @Override
+    public void Print(PrintGrade printGrade, String mess) {
+        Space();
+        String res = tips.get(printGrade) + mess;
+        System.out.print(res);
+    }
+
 }

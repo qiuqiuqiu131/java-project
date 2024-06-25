@@ -1,9 +1,12 @@
 package Tool.framework.Interface;
 
 public interface IController
-        extends ISetArchitecture,
-        IGetController,
-        IGetModle,
-        ICanInit {
+                extends ISetArchitecture,
+                IGetController,
+                IGetModle,
+                ICanRegisterEvent,
+                ICanSentEvent,
+                ICanSendCommand,
+                ICanInit {
 
 }

@@ -1,18 +1,20 @@
 package Tool.framework;
 
-import Tool.framework.Event.Events;
+import Tool.framework.Event.EventSystem;
 import Tool.framework.Event.IEventListener;
 import Tool.framework.Interface.IArchitecture;
+import Tool.framework.Interface.ICommand;
 import Tool.framework.Interface.IController;
 import Tool.framework.Interface.IModle;
+import Tool.framework.Interface.IResCommand;
 
 public abstract class AbstractArchitecture implements IArchitecture {
     private boolean mInited = false;
     private IOCContainer mContainer;
-    private Events mEvents;
+    private EventSystem mEventSystem;
 
     public AbstractArchitecture() {
-        mEvents = new Events();
+        mEventSystem = new EventSystem();
         mContainer = new IOCContainer();
         Init();
         mContainer.Init();
@@ -60,18 +62,29 @@ public abstract class AbstractArchitecture implements IArchitecture {
 
     /* 事件 */
     public <T> void SendEvent(Class<T> clz, T obj) {
-        mEvents.Trigger(clz, obj);
+        mEventSystem.Send(clz, obj);
     }
 
     public <T> void SendEvent(T obj) {
-        mEvents.Trigger(obj);
+        mEventSystem.Send(obj);
     }
 
     public <T> void RegisterEvent(Class<T> clz, IEventListener<T> listener) {
-        mEvents.Register(clz, listener);
+        mEventSystem.Register(clz, listener);
     }
 
     public <T> void UnRegisterEvent(Class<T> clz, IEventListener<T> listener) {
-        mEvents.Unregister(clz, listener);
+        mEventSystem.UnRegister(clz, listener);
+    }
+
+    /* 命令 */
+    public <T extends ICommand> void SendCommand(T com) {
+        com.SetArcitecture(this);
+        com.Execute();
+    }
+
+    public <T> T SendCommand(IResCommand<T> com) {
+        com.SetArcitecture(this);
+        return com.Execute();
     }
 }

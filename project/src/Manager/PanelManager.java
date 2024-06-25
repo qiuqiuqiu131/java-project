@@ -10,7 +10,6 @@ import View.PanelType;
 import View.Panel.BasePanel;
 
 public class PanelManager extends AbstractController implements IPanelManager {
-
     private Map<PanelType, BasePanel> panelDic;
     private Stack<PanelType> panelStack;
 

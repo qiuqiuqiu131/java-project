@@ -12,6 +12,8 @@ import Architecture.Controller.IInputManager;
  */
 public class SalerLogPanel extends BasePanel {
     public SalerLogPanel() {
+        super();
+
         panelName = "销售员登录界面";
         commandList = new ArrayList<>(Arrays.asList(
                 "登录",

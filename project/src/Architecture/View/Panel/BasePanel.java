@@ -21,6 +21,13 @@ public class BasePanel extends AbstractView {
     public String panelName;
     protected List<String> commandList;
 
+    public BasePanel() {
+        Init();
+    }
+
+    protected void Init() {
+    }
+
     /**
      * 用于面板的显示
      * 

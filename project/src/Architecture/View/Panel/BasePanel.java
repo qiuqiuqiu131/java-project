@@ -89,8 +89,4 @@ public class BasePanel extends AbstractView {
         this.GetController(IInputManager.class).PrintLine(PrintGrade.Execute, "界面返回");
         this.GetController(IPanelManager.class).ClosePanel();
     }
-
-    @Override
-    protected void OnInit() {
-    }
 }

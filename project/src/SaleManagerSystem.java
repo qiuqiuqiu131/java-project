@@ -1,11 +1,14 @@
 import Architecture.MyAcrchitecture;
 import Architecture.Controller.IInputManager;
 import Architecture.Controller.IPanelManager;
+import Architecture.View.PanelType;
 
 public class SaleManagerSystem {
     public static void main(String[] args) {
         IInputManager inputmgr = MyAcrchitecture.Instance().GetController(IInputManager.class);
         IPanelManager panelmgr = MyAcrchitecture.Instance().GetController(IPanelManager.class);
+
+        panelmgr.OpenPanel(PanelType.MainPanel);
 
         while (true) {
             /* 显示当前界面 */

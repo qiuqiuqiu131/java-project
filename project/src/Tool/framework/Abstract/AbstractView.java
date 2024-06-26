@@ -15,9 +15,4 @@ public abstract class AbstractView implements IView {
     public IArchitecture GetArchitecture() {
         return MyAcrchitecture.Instance();
     }
-
-    protected void OnDeinit() {
-    };
-
-    protected abstract void OnInit();
 }

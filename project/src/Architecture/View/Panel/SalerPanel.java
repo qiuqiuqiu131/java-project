@@ -20,7 +20,7 @@ public class SalerPanel
     }
 
     @Override
-    protected void Init() {
+    public void Init() {
         this.RegisterEvent(SalerEnterEvent.class, this);
     }
 

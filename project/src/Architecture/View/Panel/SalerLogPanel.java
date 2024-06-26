@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import Architecture.Command.SalerLoginCommand;
 import Architecture.Command.SalerRegisterCommand;
-import Architecture.Controller.IInputManager;
+import Architecture.Controller.IController.IInputManager;
 
 /**
  * 销售员登录面板

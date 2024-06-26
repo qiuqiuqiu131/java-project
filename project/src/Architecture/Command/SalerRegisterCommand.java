@@ -1,8 +1,8 @@
 package Architecture.Command;
 
-import Architecture.Controller.IInputManager;
-import Architecture.Controller.IPanelManager;
 import Architecture.Controller.PrintGrade;
+import Architecture.Controller.IController.IInputManager;
+import Architecture.Controller.IController.IPanelManager;
 import Architecture.Event.SalerEnterEvent;
 import Architecture.View.PanelType;
 import Tool.framework.Abstract.AbstractCommand;

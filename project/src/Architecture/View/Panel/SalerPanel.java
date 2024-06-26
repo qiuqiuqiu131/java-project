@@ -31,6 +31,6 @@ public class SalerPanel
 
     @Override
     public void Invoke(SalerEnterEvent obj) {
-        panelName = String.format("销售员界面 (?)", obj.Name);
+        panelName = String.format("销售员界面 (%s)", obj.Name);
     }
 }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import Architecture.Controller.IController.IInputManager;
 import Tool.framework.Abstract.AbstractController;
 
 /**

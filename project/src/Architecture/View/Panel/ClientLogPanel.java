@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import Architecture.Command.ClientLoginCommand;
 import Architecture.Command.ClientRegisterCommand;
-import Architecture.Controller.IInputManager;
+import Architecture.Controller.IController.IInputManager;
 
 /**
  * 客户登录面板

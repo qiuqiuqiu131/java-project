@@ -1,6 +1,7 @@
 package Architecture.Modle;
 
 import Architecture.Event.SalerEnterEvent;
+import Architecture.Modle.IModle.ISalerModle;
 import Tool.framework.Abstract.AbstractModle;
 import Tool.framework.Event.IEventListener;
 

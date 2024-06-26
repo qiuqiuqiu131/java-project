@@ -1,4 +1,4 @@
-package Architecture.Controller;
+package Architecture.Controller.IController;
 
 import Architecture.View.PanelType;
 import Architecture.View.Panel.BasePanel;

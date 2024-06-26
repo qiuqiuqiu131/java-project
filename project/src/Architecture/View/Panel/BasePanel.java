@@ -3,9 +3,9 @@ package Architecture.View.Panel;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import Architecture.Controller.IInputManager;
-import Architecture.Controller.IPanelManager;
 import Architecture.Controller.PrintGrade;
+import Architecture.Controller.IController.IInputManager;
+import Architecture.Controller.IController.IPanelManager;
 import Tool.framework.Abstract.AbstractView;
 
 /**

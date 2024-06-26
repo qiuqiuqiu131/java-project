@@ -3,7 +3,7 @@ package Architecture.View.Panel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import Architecture.Controller.IPanelManager;
+import Architecture.Controller.IController.IPanelManager;
 import Architecture.View.PanelType;
 
 /**

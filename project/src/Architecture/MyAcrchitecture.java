@@ -1,15 +1,15 @@
 package Architecture;
 
-import Architecture.Controller.IInputManager;
-import Architecture.Controller.IPanelManager;
 import Architecture.Controller.InputManager;
 import Architecture.Controller.PanelManager;
+import Architecture.Controller.IController.IInputManager;
+import Architecture.Controller.IController.IPanelManager;
 import Architecture.Modle.ClientModle;
 import Architecture.Modle.DataBaseModle;
-import Architecture.Modle.IClientModle;
-import Architecture.Modle.IDataBaseModle;
-import Architecture.Modle.ISalerModle;
 import Architecture.Modle.SalerModle;
+import Architecture.Modle.IModle.IClientModle;
+import Architecture.Modle.IModle.IDataBaseModle;
+import Architecture.Modle.IModle.ISalerModle;
 import Tool.framework.Abstract.AbstractArchitecture;
 
 /**

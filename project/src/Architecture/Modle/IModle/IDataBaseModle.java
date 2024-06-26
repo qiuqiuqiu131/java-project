@@ -1,4 +1,4 @@
-package Architecture.Modle;
+package Architecture.Modle.IModle;
 
 import Tool.framework.Interface.IModle;
 

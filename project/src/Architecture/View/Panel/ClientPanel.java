@@ -32,6 +32,6 @@ public class ClientPanel
 
     @Override
     public void Invoke(ClientEnterEvent obj) {
-        panelName = String.format("客户界面 (?)", obj.Name);
+        panelName = String.format("客户界面 (%s)", obj.Name);
     }
 }

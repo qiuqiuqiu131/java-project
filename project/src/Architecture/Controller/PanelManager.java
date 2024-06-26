@@ -5,14 +5,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+import Architecture.Controller.IController.IInputManager;
+import Architecture.Controller.IController.IPanelManager;
+import Architecture.Event.StartEvent;
 import Architecture.View.PanelType;
 import Architecture.View.Panel.BasePanel;
 import Tool.framework.Abstract.AbstractController;
+import Tool.framework.Event.IEventListener;
 
 /**
  * 面板控制器
  */
-public class PanelManager extends AbstractController implements IPanelManager {
+public class PanelManager
+        extends AbstractController
+        implements IPanelManager, IEventListener<StartEvent> {
     /* 储存面板枚举和面板实例的对应关系，方便存取 */
     private Map<PanelType, BasePanel> panelDic;
 
@@ -46,6 +52,21 @@ public class PanelManager extends AbstractController implements IPanelManager {
 
     @Override
     protected void OnInit() {
+        this.RegisterEvent(StartEvent.class, this);
+    }
+
+    /**
+     * 程序启动事件
+     * 
+     * @param obj
+     */
+    @Override
+    public void Invoke(StartEvent obj) {
+        for (PanelType panelType : PanelType.values()) {
+            getPanel(panelType);
+        }
+
+        OpenPanel(PanelType.MainPanel);
     }
 
     @Override

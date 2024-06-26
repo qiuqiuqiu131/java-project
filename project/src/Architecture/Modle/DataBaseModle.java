@@ -1,5 +1,6 @@
 package Architecture.Modle;
 
+import Architecture.Modle.IModle.IDataBaseModle;
 import Tool.Database.DBConnection;
 import Tool.framework.Abstract.AbstractModle;
 

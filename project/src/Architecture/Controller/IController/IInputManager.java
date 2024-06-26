@@ -1,5 +1,6 @@
-package Architecture.Controller;
+package Architecture.Controller.IController;
 
+import Architecture.Controller.PrintGrade;
 import Tool.framework.Interface.IController;
 
 /**

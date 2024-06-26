@@ -19,7 +19,6 @@ public interface ICanRegisterEvent extends IBelongToArchitecture {
      */
     default <T> void RegisterEvent(Class<T> clz, IEventListener<T> listener) {
         this.GetArchitecture().RegisterEvent(clz, listener);
-        System.out.println("订阅事件");
     }
 
     /**

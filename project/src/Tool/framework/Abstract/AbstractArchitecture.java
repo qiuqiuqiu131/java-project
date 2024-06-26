@@ -66,7 +66,6 @@ public abstract class AbstractArchitecture implements IArchitecture {
 
     public <T extends IModle> void RegisterModle(Class<T> clz, T obj) {
         obj.SetArcitecture(this);
-
         mContainer.Register(clz, obj);
 
         if (mInited) {
@@ -93,6 +92,7 @@ public abstract class AbstractArchitecture implements IArchitecture {
 
     public <T> void RegisterEvent(Class<T> clz, IEventListener<T> listener) {
         mEventSystem.Register(clz, listener);
+        System.out.println(clz.getName());
     }
 
     public <T> void UnRegisterEvent(Class<T> clz, IEventListener<T> listener) {

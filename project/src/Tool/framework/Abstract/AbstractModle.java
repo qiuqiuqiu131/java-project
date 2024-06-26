@@ -31,6 +31,7 @@ public abstract class AbstractModle implements IModle {
     @Override
     public void Init() {
         Initialized = true;
+        OnInit();
     }
 
     @Override

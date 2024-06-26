@@ -23,7 +23,7 @@ public abstract class AbstractArchitecture implements IArchitecture {
     /* 事件系统 */
     private EventSystem mEventSystem;
 
-    public AbstractArchitecture() {
+    protected AbstractArchitecture() {
         mEventSystem = new EventSystem();
         mContainer = new IOCContainer();
         Init();

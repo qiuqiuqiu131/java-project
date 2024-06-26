@@ -44,6 +44,7 @@ public class PanelManager extends AbstractController implements IPanelManager {
 
     @Override
     protected void OnInit() {
+        System.out.println("输出");
         OpenPanel(PanelType.MainPanel);
     }
 

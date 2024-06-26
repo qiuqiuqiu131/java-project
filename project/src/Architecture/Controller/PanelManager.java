@@ -25,6 +25,7 @@ public class PanelManager extends AbstractController implements IPanelManager {
         String panelPackName = BasePanel.class.getName().replace("BasePanel", "");
         for (PanelType panelType : PanelType.values()) {
             String clzName = panelPackName + panelType.toString();
+            System.out.print(clzName);
             BasePanel panel;
             // 生成实例
             try {

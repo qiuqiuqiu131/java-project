@@ -3,7 +3,7 @@ import Architecture.Controller.IInputManager;
 import Architecture.Controller.IPanelManager;
 
 public class SaleManagerSystem {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         IInputManager inputmgr = MyAcrchitecture.Instance().GetController(IInputManager.class);
         IPanelManager panelmgr = MyAcrchitecture.Instance().GetController(IPanelManager.class);
 

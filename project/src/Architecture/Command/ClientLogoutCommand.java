@@ -2,21 +2,15 @@ package Architecture.Command;
 
 import Architecture.Controller.PrintGrade;
 import Architecture.Controller.IController.IInputManager;
-import Architecture.Controller.IController.IPanelManager;
-import Architecture.Event.ClientEnterEvent;
 import Architecture.Modle.IModle.IDataBaseModle;
-import Architecture.View.PanelType;
 import Tool.Database.Class.ClientData;
 import Tool.framework.Abstract.AbstractCommand;
 
-/**
- * 客户登录命令
- */
-public class ClientLoginCommand extends AbstractCommand {
+public class ClientLogoutCommand extends AbstractCommand {
     public String Name;
     public String Password;
 
-    public ClientLoginCommand(String Name, String Password) {
+    public ClientLogoutCommand(String Name, String Password) {
         this.Name = Name;
         this.Password = Password;
     }
@@ -27,19 +21,16 @@ public class ClientLoginCommand extends AbstractCommand {
         IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
         if (!dBaseModle.ClientContained(Name)) {
-            inputMgr.PrintLine(PrintGrade.Error, "客户不存在,请先注册");
+            inputMgr.PrintLine(PrintGrade.Error, "客户不存在");
         } else {
             ClientData data = dBaseModle.GetClient(Name);
             if (data.Password.equals(Password)) {
-                this.SendEvent(new ClientEnterEvent(Name));
-
-                inputMgr.PrintLine(PrintGrade.Imforation, "客户登录成功");
-
-                this.GetController(IPanelManager.class).ClosePanel();
-                this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientPanel);
+                dBaseModle.ClientLogout(Name);
+                inputMgr.PrintLine(PrintGrade.Imforation, "客户注销成功");
             } else {
                 inputMgr.PrintLine(PrintGrade.Error, "密码错误");
             }
         }
     }
+
 }

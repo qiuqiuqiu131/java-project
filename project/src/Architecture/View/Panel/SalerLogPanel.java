@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import Architecture.Command.SalerLoginCommand;
+import Architecture.Command.SalerLogoutCommand;
 import Architecture.Command.SalerRegisterCommand;
 import Architecture.Controller.IController.IInputManager;
 
@@ -57,5 +58,29 @@ public class SalerLogPanel extends BasePanel {
 
         // 发送销售员注册命令
         this.SendCommand(new SalerRegisterCommand(salerName, salerPassword));
+    }
+
+    @SuppressWarnings("unused")
+    private void Command3() {
+        String salerName;
+        String salerPassword;
+
+        IInputManager inputmgr = this.GetController(IInputManager.class);
+        System.out.print("用户名: ");
+        salerName = inputmgr.GetInputLine();
+        while (salerName.length() == 0) {
+            System.out.print("重新输入用户名: ");
+            salerName = inputmgr.GetInputLine();
+        }
+
+        System.out.print("密码: ");
+        salerPassword = inputmgr.GetInputLine();
+        while (salerPassword.length() == 0) {
+            System.out.print("重新输入密码: ");
+            salerPassword = inputmgr.GetInputLine();
+        }
+
+        // 发送销售员注销命令
+        this.SendCommand(new SalerLogoutCommand(salerName, salerPassword));
     }
 }

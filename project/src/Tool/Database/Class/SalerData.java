@@ -1,12 +1,10 @@
 package Tool.Database.Class;
 
 public class SalerData {
-    public String ID;
     public String Name;
     public String Password;
 
-    public SalerData(String id, String name, String password) {
-        ID = id;
+    public SalerData(String name, String password) {
         Name = name;
         Password = password;
     }

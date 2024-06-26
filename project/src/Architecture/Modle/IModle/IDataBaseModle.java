@@ -12,7 +12,10 @@ public interface IDataBaseModle extends IModle {
     ClientData GetClient(String name);
 
     // 注册客户
-    int ClientAdd(String name, String password);
+    boolean ClientAdd(String name, String password);
+
+    // 注销客户
+    void ClientLogout(String name);
 
     // 判断是否存在销售员
     boolean SalerContained(String name);
@@ -21,5 +24,8 @@ public interface IDataBaseModle extends IModle {
     SalerData GetSaler(String name);
 
     // 注册销售员
-    int SalerAdd(String name, String passString);
+    boolean SalerAdd(String name, String passString);
+
+    // 注销销售员
+    void SalerLogout(String name);
 }

@@ -9,12 +9,10 @@ public class ClientModle
         extends AbstractModle
         implements IClientModle,
         IEventListener<ClientEnterEvent> {
-    private String Id;
     private String Name;
 
     @Override
     public void Invoke(ClientEnterEvent obj) {
-        Id = obj.Id;
         Name = obj.Name;
     }
 

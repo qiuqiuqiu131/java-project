@@ -28,14 +28,13 @@ public class ClientRegisterCommand extends AbstractCommand {
         if (dBaseModle.ClientContained(Name)) {
             inputMgr.PrintLine(PrintGrade.Error, "用户名已存在");
         } else {
-            int id = dBaseModle.ClientAdd(Name, Password);
-            if (id == -1) {
+            boolean f = dBaseModle.ClientAdd(Name, Password);
+            if (!f) {
                 inputMgr.PrintLine(PrintGrade.Error, "注册失败");
                 return;
             }
 
-            String Id = String.valueOf(id);
-            this.SendEvent(new ClientEnterEvent(Id, Name));
+            this.SendEvent(new ClientEnterEvent(Name));
 
             inputMgr.PrintLine(PrintGrade.Imforation, "客户注册成功");
 

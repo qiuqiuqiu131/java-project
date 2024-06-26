@@ -28,14 +28,13 @@ public class SalerLoginCommand extends AbstractCommand {
         if (dBaseModle.SalerContained(Name)) {
             inputMgr.PrintLine(PrintGrade.Error, "用户名已存在");
         } else {
-            int id = dBaseModle.SalerAdd(Name, Password);
-            if (id == -1) {
+            boolean f = dBaseModle.SalerAdd(Name, Password);
+            if (!f) {
                 inputMgr.PrintLine(PrintGrade.Error, "注册失败");
                 return;
             }
 
-            String Id = String.valueOf(id);
-            this.SendEvent(new SalerEnterEvent(Id, Name));
+            this.SendEvent(new SalerEnterEvent(Name));
 
             inputMgr.PrintLine(PrintGrade.Imforation, "销售员注册成功");
 

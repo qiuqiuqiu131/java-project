@@ -32,7 +32,7 @@ public class SalerRegisterCommand extends AbstractCommand {
             SalerData data = dBaseModle.GetSaler(Name);
 
             if (data.Password == Password) {
-                this.SendEvent(new SalerEnterEvent(data.ID, Name));
+                this.SendEvent(new SalerEnterEvent(Name));
 
                 inputMgr.PrintLine(PrintGrade.Imforation, "销售员登录成功");
 

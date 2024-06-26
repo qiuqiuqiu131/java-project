@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.mysql.cj.xdevapi.PreparableStatement;
-
 import Architecture.Modle.IModle.IDataBaseModle;
 import Tool.Database.DBConnection;
 import Tool.Database.Class.ClientData;
@@ -15,8 +13,6 @@ import Tool.framework.Abstract.AbstractModle;
 
 public class DataBaseModle extends AbstractModle implements IDataBaseModle {
     private DBConnection dbConnection;
-    private int clientCount;
-    private int salerCount;
 
     public DataBaseModle() {
         dbConnection = new DBConnection();
@@ -25,9 +21,6 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
     @Override
     protected void OnInit() {
         dbConnection.GetConn();
-
-        clientCount = ClientCount();
-        salerCount = SalerCount();
     }
 
     @Override
@@ -47,15 +40,39 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
             String sql = String.format("SELECT * FROM client WHERE client.name = '%s'", name);
             ResultSet res = ExecuteSql(sql);
             if (res.next()) {
-                String Id = res.getString("id");
                 String Name = res.getString("name");
                 String Password = res.getString("password");
-                return new ClientData(Id, Name, Password);
+                return new ClientData(Name, Password);
             }
         } catch (SQLException e) {
             return null;
         }
         return null;
+    }
+
+    @Override
+    public boolean ClientAdd(String name, String password) {
+        String sql = "INSERT INTO client(name,password) VALUES(?,?)";
+        try (PreparedStatement pStatement = dbConnection.GetConn().prepareStatement(sql)) {
+            pStatement.setString(1, name);
+            pStatement.setString(2, password);
+
+            pStatement.executeUpdate();
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public void ClientLogout(String name) {
+        String sql = "DELETE FROM client WHERE client.name = ?";
+        try (PreparedStatement pStatement = dbConnection.GetConn().prepareStatement(sql)) {
+            pStatement.setString(1, name);
+            pStatement.executeUpdate();
+        } catch (Exception e) {
+        }
     }
 
     @Override
@@ -75,10 +92,9 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
             String sql = String.format("SELECT * FROM saler WHERE saler.name = '%s'", name);
             ResultSet res = ExecuteSql(sql);
             if (res.next()) {
-                String Id = res.getString("id");
                 String Name = res.getString("name");
                 String Password = res.getString("password");
-                return new SalerData(Id, Name, Password);
+                return new SalerData(Name, Password);
             }
         } catch (SQLException e) {
             return null;
@@ -87,62 +103,27 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
     }
 
     @Override
-    public int ClientAdd(String name, String password) {
-        String sql = "INSERT INTO client(id,name,password) VALUES(?,?,?)";
+    public boolean SalerAdd(String name, String password) {
+        String sql = "INSERT INTO saler(name,password) VALUES(?,?)";
         try (PreparedStatement pStatement = dbConnection.GetConn().prepareStatement(sql)) {
-            pStatement.setString(1, String.valueOf(clientCount + 1));
-            pStatement.setString(2, name);
-            pStatement.setString(3, password);
+            pStatement.setString(1, name);
+            pStatement.setString(2, password);
 
             pStatement.executeUpdate();
 
-            clientCount++;
-            return clientCount;
+            return true;
         } catch (Exception e) {
-            return -1;
+            return false;
         }
     }
 
     @Override
-    public int SalerAdd(String name, String password) {
-        String sql = "INSERT INTO saler(id,name,password) VALUES(?,?,?)";
+    public void SalerLogout(String name) {
+        String sql = "DELETE FROM saler WHERE saler.name = ?";
         try (PreparedStatement pStatement = dbConnection.GetConn().prepareStatement(sql)) {
-            pStatement.setString(1, String.valueOf(salerCount + 1));
-            pStatement.setString(2, name);
-            pStatement.setString(3, password);
-
+            pStatement.setString(1, name);
             pStatement.executeUpdate();
-
-            salerCount++;
-            return salerCount;
         } catch (Exception e) {
-            return -1;
-        }
-    }
-
-    private int ClientCount() {
-        try {
-            String sql = "SELECT COUNT(*) AS c FROM client";
-            ResultSet res = ExecuteSql(sql);
-            if (res.next())
-                return res.getInt("c");
-            else
-                return 0;
-        } catch (SQLException e) {
-            return 0;
-        }
-    }
-
-    private int SalerCount() {
-        try {
-            String sql = "SELECT COUNT(*) AS c FROM saler";
-            ResultSet res = ExecuteSql(sql);
-            if (res.next())
-                return res.getInt("c");
-            else
-                return 0;
-        } catch (SQLException e) {
-            return 0;
         }
     }
 

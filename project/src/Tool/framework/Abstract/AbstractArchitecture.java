@@ -92,7 +92,6 @@ public abstract class AbstractArchitecture implements IArchitecture {
 
     public <T> void RegisterEvent(Class<T> clz, IEventListener<T> listener) {
         mEventSystem.Register(clz, listener);
-        System.out.println(clz.getName());
     }
 
     public <T> void UnRegisterEvent(Class<T> clz, IEventListener<T> listener) {

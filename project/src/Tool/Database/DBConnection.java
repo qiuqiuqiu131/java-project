@@ -4,21 +4,22 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBConnection {
-    private final String userName = "root";
-    private final String password = "123456";
-    private final String url = "jdbc:mysql://localhost:3306/sw_system";
+    private final static String userName = "root";
+    private final static String password = "123456";
+    private final static String url = "jdbc:mysql://localhost:3306/sw_system";
 
     private Connection conn = null;
 
-    public Connection GetConn() {
-        if (conn == null) {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                conn = DriverManager.getConnection(url, userName, password);
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
+    public DBConnection() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(url, userName, password);
+        } catch (Exception e) {
+            System.err.println("数据库连接失败");
         }
+    }
+
+    public Connection GetConn() {
         return conn;
     }
 }

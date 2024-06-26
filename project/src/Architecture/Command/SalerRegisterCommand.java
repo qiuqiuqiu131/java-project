@@ -4,7 +4,9 @@ import Architecture.Controller.PrintGrade;
 import Architecture.Controller.IController.IInputManager;
 import Architecture.Controller.IController.IPanelManager;
 import Architecture.Event.SalerEnterEvent;
+import Architecture.Modle.IModle.IDataBaseModle;
 import Architecture.View.PanelType;
+import Tool.Database.Class.SalerData;
 import Tool.framework.Abstract.AbstractCommand;
 
 /**
@@ -22,12 +24,24 @@ public class SalerRegisterCommand extends AbstractCommand {
     @Override
     protected void OnExecute() {
         IInputManager inputMgr = this.GetController(IInputManager.class);
-        inputMgr.PrintLine(PrintGrade.Imforation, "销售员注册成功");
+        IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
-        this.SendEvent(new SalerEnterEvent("0", Name));
+        if (!dBaseModle.ClientContained(Name)) {
+            inputMgr.PrintLine(PrintGrade.Error, "销售员不存在,请先注册");
+        } else {
+            SalerData data = dBaseModle.GetSeler(Name);
 
-        this.GetController(IPanelManager.class).ClosePanel();
-        this.GetController(IPanelManager.class).OpenPanel(PanelType.SalerPanel);
+            if (data.Password == Password) {
+                this.SendEvent(new SalerEnterEvent(data.ID, Name));
+
+                inputMgr.PrintLine(PrintGrade.Imforation, "销售员登录成功");
+
+                this.GetController(IPanelManager.class).ClosePanel();
+                this.GetController(IPanelManager.class).OpenPanel(PanelType.SalerPanel);
+            } else {
+                inputMgr.PrintLine(PrintGrade.Error, "密码错误");
+            }
+        }
     }
 
 }

@@ -4,6 +4,7 @@ import Architecture.Controller.PrintGrade;
 import Architecture.Controller.IController.IInputManager;
 import Architecture.Controller.IController.IPanelManager;
 import Architecture.Event.ClientEnterEvent;
+import Architecture.Modle.IModle.IDataBaseModle;
 import Architecture.View.PanelType;
 import Tool.framework.Abstract.AbstractCommand;
 
@@ -22,12 +23,24 @@ public class ClientRegisterCommand extends AbstractCommand {
     @Override
     protected void OnExecute() {
         IInputManager inputMgr = this.GetController(IInputManager.class);
-        inputMgr.PrintLine(PrintGrade.Imforation, "客户注册成功");
+        IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
-        this.SendEvent(new ClientEnterEvent("0", Name));
+        if (dBaseModle.ClientContained(Name)) {
+            inputMgr.PrintLine(PrintGrade.Error, "用户名已存在");
+        } else {
+            int id = dBaseModle.ClientAdd(Name, Password);
+            if (id == -1) {
+                inputMgr.PrintLine(PrintGrade.Error, "注册失败");
+                return;
+            }
 
-        this.GetController(IPanelManager.class).ClosePanel();
-        this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientPanel);
+            String Id = String.valueOf(id);
+            this.SendEvent(new ClientEnterEvent(Id, Name));
+
+            inputMgr.PrintLine(PrintGrade.Imforation, "客户注册成功");
+
+            this.GetController(IPanelManager.class).ClosePanel();
+            this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientPanel);
+        }
     }
-
 }

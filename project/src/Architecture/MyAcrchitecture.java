@@ -22,7 +22,6 @@ public class MyAcrchitecture extends AbstractArchitecture {
 
     public static MyAcrchitecture Instance() {
         if (_instance == null) {
-            System.out.print("fsd");
             _instance = new MyAcrchitecture();
         }
         return _instance;

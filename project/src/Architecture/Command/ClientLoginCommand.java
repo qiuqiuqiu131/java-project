@@ -30,8 +30,7 @@ public class ClientLoginCommand extends AbstractCommand {
             inputMgr.PrintLine(PrintGrade.Error, "客户不存在,请先注册");
         } else {
             ClientData data = dBaseModle.GetClient(Name);
-
-            if (data.Password == Password) {
+            if (data.Password.equals(Password)) {
                 this.SendEvent(new ClientEnterEvent(data.ID, Name));
 
                 inputMgr.PrintLine(PrintGrade.Imforation, "客户登录成功");

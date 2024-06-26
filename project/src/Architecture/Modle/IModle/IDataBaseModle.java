@@ -18,7 +18,7 @@ public interface IDataBaseModle extends IModle {
     boolean SalerContained(String name);
 
     // 获取销售员信息
-    SalerData GetSeler(String name);
+    SalerData GetSaler(String name);
 
     // 注册销售员
     int SalerAdd(String name, String passString);

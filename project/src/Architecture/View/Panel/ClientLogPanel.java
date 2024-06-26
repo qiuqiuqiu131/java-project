@@ -34,6 +34,7 @@ public class ClientLogPanel extends BasePanel {
         System.out.print("密码: ");
         clientPassword = inputmgr.GetInputLine();
 
+        // 发送客户登录命令
         this.SendCommand(new ClientLoginCommand(clientName, clientPassword));
     }
 
@@ -48,9 +49,19 @@ public class ClientLogPanel extends BasePanel {
         IInputManager inputmgr = this.GetController(IInputManager.class);
         System.out.print("用户名: ");
         clientName = inputmgr.GetInputLine();
+        while (clientName.length() == 0) {
+            System.out.print("重新输入用户名: ");
+            clientName = inputmgr.GetInputLine();
+        }
+
         System.out.print("密码: ");
         clientPassword = inputmgr.GetInputLine();
+        while (clientPassword.length() == 0) {
+            System.out.print("重新输入密码: ");
+            clientPassword = inputmgr.GetInputLine();
+        }
 
+        // 发送客户注册命令
         this.SendCommand(new ClientRegisterCommand(clientName, clientPassword));
     }
 }

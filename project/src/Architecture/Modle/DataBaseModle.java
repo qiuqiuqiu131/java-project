@@ -1,8 +1,11 @@
 package Architecture.Modle;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import com.mysql.cj.xdevapi.PreparableStatement;
 
 import Architecture.Modle.IModle.IDataBaseModle;
 import Tool.Database.DBConnection;
@@ -25,14 +28,12 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
 
         clientCount = ClientCount();
         salerCount = SalerCount();
-
-        System.out.println(clientCount + " " + salerCount);
     }
 
     @Override
     public boolean ClientContained(String name) {
         try {
-            String sql = String.format("SELECT * FROM client WHERE client.name == '%s'", name);
+            String sql = String.format("SELECT * FROM client WHERE client.name = '%s'", name);
             ResultSet res = ExecuteSql(sql);
             return res.next();
         } catch (SQLException e) {
@@ -43,7 +44,7 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
     @Override
     public ClientData GetClient(String name) {
         try {
-            String sql = String.format("SELECT * FROM client WHERE client.name == '%s'", name);
+            String sql = String.format("SELECT * FROM client WHERE client.name = '%s'", name);
             ResultSet res = ExecuteSql(sql);
             if (res.next()) {
                 String Id = res.getString("id");
@@ -60,7 +61,7 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
     @Override
     public boolean SalerContained(String name) {
         try {
-            String sql = String.format("SELECT * FROM saler WHERE saler.name == '%s'", name);
+            String sql = String.format("SELECT * FROM saler WHERE saler.name = '%s'", name);
             ResultSet res = ExecuteSql(sql);
             return res.next();
         } catch (SQLException e) {
@@ -69,9 +70,9 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
     }
 
     @Override
-    public SalerData GetSeler(String name) {
+    public SalerData GetSaler(String name) {
         try {
-            String sql = String.format("SELECT * FROM saler WHERE saler.name == '%s'", name);
+            String sql = String.format("SELECT * FROM saler WHERE saler.name = '%s'", name);
             ResultSet res = ExecuteSql(sql);
             if (res.next()) {
                 String Id = res.getString("id");
@@ -87,25 +88,34 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
 
     @Override
     public int ClientAdd(String name, String password) {
-        try {
-            String sql = String.format("INSERT INTO client VALUES('%s','%s','%s')", String.valueOf(clientCount + 1),
-                    name, password);
-            ExecuteSql(sql);
+        String sql = "INSERT INTO client(id,name,password) VALUES(?,?,?)";
+        try (PreparedStatement pStatement = dbConnection.GetConn().prepareStatement(sql)) {
+            pStatement.setString(1, String.valueOf(clientCount + 1));
+            pStatement.setString(2, name);
+            pStatement.setString(3, password);
+
+            pStatement.executeUpdate();
+
             clientCount++;
             return clientCount;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             return -1;
         }
     }
 
     @Override
     public int SalerAdd(String name, String password) {
-        try {
-            String sql = String.format("INSERT INTO saler VALUES('%s','%s','%s')", salerCount + 1, name, password);
-            ExecuteSql(sql);
+        String sql = "INSERT INTO saler(id,name,password) VALUES(?,?,?)";
+        try (PreparedStatement pStatement = dbConnection.GetConn().prepareStatement(sql)) {
+            pStatement.setString(1, String.valueOf(salerCount + 1));
+            pStatement.setString(2, name);
+            pStatement.setString(3, password);
+
+            pStatement.executeUpdate();
+
             salerCount++;
-            return clientCount;
-        } catch (SQLException e) {
+            return salerCount;
+        } catch (Exception e) {
             return -1;
         }
     }

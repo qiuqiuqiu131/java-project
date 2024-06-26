@@ -29,7 +29,7 @@ public class SalerRegisterCommand extends AbstractCommand {
         if (!dBaseModle.ClientContained(Name)) {
             inputMgr.PrintLine(PrintGrade.Error, "销售员不存在,请先注册");
         } else {
-            SalerData data = dBaseModle.GetSeler(Name);
+            SalerData data = dBaseModle.GetSaler(Name);
 
             if (data.Password == Password) {
                 this.SendEvent(new SalerEnterEvent(data.ID, Name));

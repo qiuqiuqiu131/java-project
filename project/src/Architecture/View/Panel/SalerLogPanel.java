@@ -22,29 +22,40 @@ public class SalerLogPanel extends BasePanel {
 
     @SuppressWarnings("unused")
     private void Command1() {
-        String clientName;
-        String clientPassword;
+        String salerName;
+        String salerPassword;
 
         IInputManager inputmgr = this.GetController(IInputManager.class);
         System.out.print("用户名: ");
-        clientName = inputmgr.GetInputLine();
+        salerName = inputmgr.GetInputLine();
         System.out.print("密码: ");
-        clientPassword = inputmgr.GetInputLine();
+        salerPassword = inputmgr.GetInputLine();
 
-        this.SendCommand(new SalerLoginCommand(clientName, clientPassword));
+        // 发送销售员登录命令
+        this.SendCommand(new SalerLoginCommand(salerName, salerPassword));
     }
 
     @SuppressWarnings("unused")
     private void Command2() {
-        String clientName;
-        String clientPassword;
+        String salerName;
+        String salerPassword;
 
         IInputManager inputmgr = this.GetController(IInputManager.class);
         System.out.print("用户名: ");
-        clientName = inputmgr.GetInputLine();
-        System.out.print("密码: ");
-        clientPassword = inputmgr.GetInputLine();
+        salerName = inputmgr.GetInputLine();
+        while (salerName.length() == 0) {
+            System.out.println("重新输入用户名: ");
+            salerName = inputmgr.GetInputLine();
+        }
 
-        this.SendCommand(new SalerRegisterCommand(clientName, clientPassword));
+        System.out.print("密码: ");
+        salerPassword = inputmgr.GetInputLine();
+        while (salerPassword.length() == 0) {
+            System.out.print("重新输入密码: ");
+            salerPassword = inputmgr.GetInputLine();
+        }
+
+        // 发送销售员注册命令
+        this.SendCommand(new SalerRegisterCommand(salerName, salerPassword));
     }
 }

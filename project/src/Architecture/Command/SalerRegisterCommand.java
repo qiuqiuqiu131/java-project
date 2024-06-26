@@ -3,6 +3,7 @@ package Architecture.Command;
 import Architecture.Controller.IInputManager;
 import Architecture.Controller.IPanelManager;
 import Architecture.Controller.PrintGrade;
+import Architecture.Event.SalerEnterEvent;
 import Architecture.View.PanelType;
 import Tool.framework.Abstract.AbstractCommand;
 
@@ -22,6 +23,9 @@ public class SalerRegisterCommand extends AbstractCommand {
     protected void OnExecute() {
         IInputManager inputMgr = this.GetController(IInputManager.class);
         inputMgr.PrintLine(PrintGrade.Imforation, "销售员注册成功");
+
+        this.SendEvent(new SalerEnterEvent("0", Name));
+
         this.GetController(IPanelManager.class).ClosePanel();
         this.GetController(IPanelManager.class).OpenPanel(PanelType.SalerPanel);
     }

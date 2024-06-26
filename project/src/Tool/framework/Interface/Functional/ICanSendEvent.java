@@ -26,7 +26,7 @@ public interface ICanSendEvent extends IBelongToArchitecture {
      * @param clz      需要取消订阅的事件类型,需要自定义对应事件的事件类
      * @param listener 订阅事件的监听者
      */
-    default <T> void SendEvent(Class<T> clz) {
-        this.GetArchitecture().SendEvent(clz);
+    default <T> void SendEvent(T obj) {
+        this.GetArchitecture().SendEvent(obj);
     }
 }

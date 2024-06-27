@@ -6,6 +6,9 @@ import Architecture.Modle.IModle.IDataBaseModle;
 import Tool.Database.Class.SalerData;
 import Tool.framework.Abstract.AbstractCommand;
 
+/**
+ * 销售员注销接口
+ */
 public class SalerLogoutCommand extends AbstractCommand {
 
     public String Name;

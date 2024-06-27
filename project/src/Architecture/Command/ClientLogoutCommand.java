@@ -6,6 +6,9 @@ import Architecture.Modle.IModle.IDataBaseModle;
 import Tool.Database.Class.ClientData;
 import Tool.framework.Abstract.AbstractCommand;
 
+/**
+ * 客户注销命令
+ */
 public class ClientLogoutCommand extends AbstractCommand {
     public String Name;
     public String Password;

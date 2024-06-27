@@ -3,6 +3,7 @@ package Tool.framework.Interface;
 import Tool.framework.Interface.Functional.ICanSendEvent;
 import Tool.framework.Interface.Functional.IGetController;
 import Tool.framework.Interface.Functional.IGetModle;
+import Tool.framework.Interface.Functional.IGetUtility;
 import Tool.framework.Interface.Functional.ISetArchitecture;
 
 /**
@@ -15,6 +16,7 @@ public interface ICommand
         ISetArchitecture,
         IGetController,
         IGetModle,
+        IGetUtility,
         ICanSendEvent {
     /**
      * 命令的执行函数

@@ -6,6 +6,7 @@ import Tool.framework.Interface.Functional.ICanSendCommand;
 import Tool.framework.Interface.Functional.ICanSendEvent;
 import Tool.framework.Interface.Functional.IGetController;
 import Tool.framework.Interface.Functional.IGetModle;
+import Tool.framework.Interface.Functional.IGetUtility;
 import Tool.framework.Interface.Functional.ISetArchitecture;
 
 /**
@@ -14,12 +15,13 @@ import Tool.framework.Interface.Functional.ISetArchitecture;
  * @author 洪秋阳
  */
 public interface IController
-        extends ISetArchitecture,
-        IGetController,
-        IGetModle,
-        ICanRegisterEvent,
-        ICanSendEvent,
-        ICanSendCommand,
-        ICanInit {
+                extends ISetArchitecture,
+                IGetController,
+                IGetModle,
+                ICanRegisterEvent,
+                ICanSendEvent,
+                ICanSendCommand,
+                IGetUtility,
+                ICanInit {
 
 }

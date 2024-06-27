@@ -4,6 +4,8 @@ import Architecture.Controller.PrintGrade;
 import Architecture.Controller.IController.IInputManager;
 import Architecture.Controller.IController.IPanelManager;
 import Architecture.Event.ClientEnterEvent;
+import Architecture.Modle.IModle.IDataBaseModle;
+import Architecture.Utility.IEncodeUtility;
 import Architecture.View.PanelType;
 import Tool.framework.Abstract.AbstractCommand;
 
@@ -22,12 +24,24 @@ public class ClientRegisterCommand extends AbstractCommand {
     @Override
     protected void OnExecute() {
         IInputManager inputMgr = this.GetController(IInputManager.class);
-        inputMgr.PrintLine(PrintGrade.Imforation, "客户注册成功");
+        IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
-        this.SendEvent(new ClientEnterEvent("0", Name));
+        if (dBaseModle.ClientContained(Name)) {
+            inputMgr.PrintLine(PrintGrade.Error, "用户名已存在");
+        } else {
+            // 密码加密
+            String encodePwd = this.GetUtility(IEncodeUtility.class).encode(Password, "加密");
+            try {
+                dBaseModle.ClientAdd(Name, encodePwd);
 
-        this.GetController(IPanelManager.class).ClosePanel();
-        this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientPanel);
+                this.SendEvent(new ClientEnterEvent(Name));
+                inputMgr.PrintLine(PrintGrade.Imforation, "客户注册成功");
+
+                this.GetController(IPanelManager.class).ClosePanel();
+                this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientPanel);
+            } catch (Exception e) {
+                inputMgr.PrintLine(PrintGrade.Error, "注册失败");
+            }
+        }
     }
-
 }

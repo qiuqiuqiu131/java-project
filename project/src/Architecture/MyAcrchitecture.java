@@ -10,6 +10,8 @@ import Architecture.Modle.SalerModle;
 import Architecture.Modle.IModle.IClientModle;
 import Architecture.Modle.IModle.IDataBaseModle;
 import Architecture.Modle.IModle.ISalerModle;
+import Architecture.Utility.EncodeUtility;
+import Architecture.Utility.IEncodeUtility;
 import Tool.framework.Abstract.AbstractArchitecture;
 
 /**
@@ -43,5 +45,7 @@ public class MyAcrchitecture extends AbstractArchitecture {
         this.RegisterModle(IClientModle.class, new ClientModle());
         /* 销售员 */
         this.RegisterModle(ISalerModle.class, new SalerModle());
+        /* 加密工具 */
+        this.RegisterUtility(IEncodeUtility.class, new EncodeUtility());
     }
 }

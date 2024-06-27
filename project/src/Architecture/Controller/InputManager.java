@@ -15,7 +15,7 @@ public class InputManager extends AbstractController implements IInputManager {
     private Map<PrintGrade, String> tips;
 
     public InputManager() {
-        scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in, "GBK");
 
         tips = new HashMap<PrintGrade, String>();
         tips.put(PrintGrade.Error, "错误: ");
@@ -30,12 +30,12 @@ public class InputManager extends AbstractController implements IInputManager {
 
     @Override
     public String GetInputLine() {
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
     @Override
     public String GetInput() {
-        return scanner.next();
+        return scanner.next().trim();
     }
 
     @Override

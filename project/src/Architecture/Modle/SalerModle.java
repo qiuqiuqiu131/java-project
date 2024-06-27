@@ -8,7 +8,6 @@ import Tool.framework.Event.IEventListener;
 public class SalerModle extends AbstractModle
         implements ISalerModle,
         IEventListener<SalerEnterEvent> {
-    private String Id;
     private String Name;
 
     @Override
@@ -18,7 +17,6 @@ public class SalerModle extends AbstractModle
 
     @Override
     public void Invoke(SalerEnterEvent obj) {
-        Id = obj.Id;
         Name = obj.Name;
     }
 

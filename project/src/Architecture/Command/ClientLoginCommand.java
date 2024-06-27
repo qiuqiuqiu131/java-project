@@ -4,7 +4,10 @@ import Architecture.Controller.PrintGrade;
 import Architecture.Controller.IController.IInputManager;
 import Architecture.Controller.IController.IPanelManager;
 import Architecture.Event.ClientEnterEvent;
+import Architecture.Modle.IModle.IDataBaseModle;
+import Architecture.Utility.IEncodeUtility;
 import Architecture.View.PanelType;
+import Tool.Database.Class.ClientData;
 import Tool.framework.Abstract.AbstractCommand;
 
 /**
@@ -22,11 +25,23 @@ public class ClientLoginCommand extends AbstractCommand {
     @Override
     protected void OnExecute() {
         IInputManager inputMgr = this.GetController(IInputManager.class);
-        inputMgr.PrintLine(PrintGrade.Imforation, "客户登录成功");
+        IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
-        this.SendEvent(new ClientEnterEvent("0", Name));
+        if (!dBaseModle.ClientContained(Name)) {
+            inputMgr.PrintLine(PrintGrade.Error, "客户不存在,请先注册");
+        } else {
+            ClientData data = dBaseModle.GetClient(Name);
+            String decodePwd = this.GetUtility(IEncodeUtility.class).decode(data.Password, "加密");
+            if (Password.equals(decodePwd)) {
+                this.SendEvent(new ClientEnterEvent(Name));
 
-        this.GetController(IPanelManager.class).ClosePanel();
-        this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientPanel);
+                inputMgr.PrintLine(PrintGrade.Imforation, "客户登录成功");
+
+                this.GetController(IPanelManager.class).ClosePanel();
+                this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientPanel);
+            } else {
+                inputMgr.PrintLine(PrintGrade.Error, "密码错误");
+            }
+        }
     }
 }

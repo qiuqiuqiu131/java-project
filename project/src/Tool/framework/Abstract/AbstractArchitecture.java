@@ -8,13 +8,24 @@ import Tool.framework.Interface.ICommand;
 import Tool.framework.Interface.IController;
 import Tool.framework.Interface.IModle;
 import Tool.framework.Interface.IResCommand;
+import Tool.framework.Interface.IUtility;
+import Tool.framework.Interface.Functional.ICanInit;
 
+/**
+ * 框架虚基类
+ * 当需要设置一个项目的框架时必须继承自此基类
+ * 同时,继承此基类的框架必须写成单例模式，方便View层获取框架对象
+ * 
+ * @author 洪秋阳
+ */
 public abstract class AbstractArchitecture implements IArchitecture {
     private boolean mInited = false;
+    /* 控制反转容器 */
     private IOCContainer mContainer;
+    /* 事件系统 */
     private EventSystem mEventSystem;
 
-    public AbstractArchitecture() {
+    protected AbstractArchitecture() {
         mEventSystem = new EventSystem();
         mContainer = new IOCContainer();
         Init();
@@ -22,6 +33,18 @@ public abstract class AbstractArchitecture implements IArchitecture {
         mInited = true;
     }
 
+    /**
+     * 虚函数,子类必须实现此初始化函数
+     * 子类需要将框架中需要使用到的模块在这个函数中注册
+     * 
+     * 示例：
+     * {@code
+     * protected void Init(){
+     *    this.RegisterController(IUIController.class,new UIController());
+     *    this.RegisterModle(IClientModle.class,new ClientModle());
+     * }
+     * }
+     */
     protected abstract void Init();
 
     public void Deinit() {
@@ -38,18 +61,25 @@ public abstract class AbstractArchitecture implements IArchitecture {
 
         mContainer.Register(clz, obj);
 
-        if (mInited) {
-            obj.Init();
+        if (mInited && obj instanceof ICanInit) {
+            ((ICanInit) obj).Init();
         }
     }
 
     public <T extends IModle> void RegisterModle(Class<T> clz, T obj) {
         obj.SetArcitecture(this);
-
         mContainer.Register(clz, obj);
 
-        if (mInited) {
-            obj.Init();
+        if (mInited && obj instanceof ICanInit) {
+            ((ICanInit) obj).Init();
+        }
+    }
+
+    public <T extends IUtility> void RegisterUtility(Class<T> clz, T obj) {
+        mContainer.Register(clz, obj);
+
+        if (mInited && obj instanceof ICanInit) {
+            ((ICanInit) obj).Init();
         }
     }
 
@@ -58,6 +88,10 @@ public abstract class AbstractArchitecture implements IArchitecture {
     }
 
     public <T extends IModle> T GetModle(Class<T> clz) {
+        return mContainer.Get(clz);
+    }
+
+    public <T extends IUtility> T GetUtility(Class<T> clz) {
         return mContainer.Get(clz);
     }
 

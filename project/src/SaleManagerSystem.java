@@ -1,11 +1,18 @@
-import Manager.IInputManager;
-import Manager.IPanelManager;
-import Tool.MyAcrchitecture;
+import Architecture.MyAcrchitecture;
+import Architecture.Controller.IController.IInputManager;
+import Architecture.Controller.IController.IPanelManager;
+import Architecture.Event.StartEvent;
+import Tool.framework.Interface.IArchitecture;
 
 public class SaleManagerSystem {
-    public static void main(String[] args) throws Exception {
-        IInputManager inputmgr = MyAcrchitecture.Instance().GetController(IInputManager.class);
-        IPanelManager panelmgr = MyAcrchitecture.Instance().GetController(IPanelManager.class);
+    public static void main(String[] args) {
+        IArchitecture iArchitecture = MyAcrchitecture.Instance();
+
+        IInputManager inputmgr = iArchitecture.GetController(IInputManager.class);
+        IPanelManager panelmgr = iArchitecture.GetController(IPanelManager.class);
+
+        // 发送项目启动事件
+        iArchitecture.SendEvent(new StartEvent());
 
         while (true) {
             /* 显示当前界面 */

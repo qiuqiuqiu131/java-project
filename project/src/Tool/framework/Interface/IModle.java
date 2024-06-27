@@ -4,6 +4,7 @@ import Tool.framework.Interface.Functional.ICanInit;
 import Tool.framework.Interface.Functional.ICanRegisterEvent;
 import Tool.framework.Interface.Functional.ICanSendEvent;
 import Tool.framework.Interface.Functional.IGetModle;
+import Tool.framework.Interface.Functional.IGetUtility;
 import Tool.framework.Interface.Functional.ISetArchitecture;
 
 /**
@@ -12,10 +13,11 @@ import Tool.framework.Interface.Functional.ISetArchitecture;
  * @author 洪秋阳
  */
 public interface IModle
-                extends ISetArchitecture,
-                IGetModle,
-                ICanSendEvent,
-                ICanRegisterEvent,
-                ICanInit {
+        extends ISetArchitecture,
+        IGetModle,
+        ICanSendEvent,
+        ICanRegisterEvent,
+        IGetUtility,
+        ICanInit {
 
 }

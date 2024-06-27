@@ -3,6 +3,7 @@ package Architecture.Command;
 import Architecture.Controller.PrintGrade;
 import Architecture.Controller.IController.IInputManager;
 import Architecture.Modle.IModle.IDataBaseModle;
+import Architecture.Utility.IEncodeUtility;
 import Tool.Database.Class.SalerData;
 import Tool.framework.Abstract.AbstractCommand;
 
@@ -28,7 +29,8 @@ public class SalerLogoutCommand extends AbstractCommand {
             inputMgr.PrintLine(PrintGrade.Error, "销售员不存在");
         } else {
             SalerData data = dBaseModle.GetSaler(Name);
-            if (data.Password.equals(Password)) {
+            String decodePwd = this.GetUtility(IEncodeUtility.class).decode(data.Password, "加密");
+            if (data.Password.equals(decodePwd)) {
                 dBaseModle.SalerLogout(Name);
                 inputMgr.PrintLine(PrintGrade.Imforation, "销售员注销成功");
             } else {

@@ -3,9 +3,11 @@ package Architecture.Command;
 import Architecture.Controller.PrintGrade;
 import Architecture.Controller.IController.IInputManager;
 import Architecture.Controller.IController.IPanelManager;
-import Architecture.Event.SalerEnterEvent;
+import Architecture.Event.ClientEnterEvent;
 import Architecture.Modle.IModle.IDataBaseModle;
+import Architecture.Utility.IEncodeUtility;
 import Architecture.View.PanelType;
+import Tool.Database.Class.ClientData;
 import Tool.framework.Abstract.AbstractCommand;
 
 /**
@@ -25,21 +27,21 @@ public class SalerLoginCommand extends AbstractCommand {
         IInputManager inputMgr = this.GetController(IInputManager.class);
         IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
-        if (dBaseModle.SalerContained(Name)) {
-            inputMgr.PrintLine(PrintGrade.Error, "用户名已存在");
+        if (!dBaseModle.ClientContained(Name)) {
+            inputMgr.PrintLine(PrintGrade.Error, "销售员不存在,请先注册");
         } else {
-            boolean f = dBaseModle.SalerAdd(Name, Password);
-            if (!f) {
-                inputMgr.PrintLine(PrintGrade.Error, "注册失败");
-                return;
+            ClientData data = dBaseModle.GetClient(Name);
+            String decodePwd = this.GetUtility(IEncodeUtility.class).decode(data.Password, "加密");
+            if (Password.equals(decodePwd)) {
+                this.SendEvent(new ClientEnterEvent(Name));
+
+                inputMgr.PrintLine(PrintGrade.Imforation, "销售员登录成功");
+
+                this.GetController(IPanelManager.class).ClosePanel();
+                this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientPanel);
+            } else {
+                inputMgr.PrintLine(PrintGrade.Error, "密码错误");
             }
-
-            this.SendEvent(new SalerEnterEvent(Name));
-
-            inputMgr.PrintLine(PrintGrade.Imforation, "销售员注册成功");
-
-            this.GetController(IPanelManager.class).ClosePanel();
-            this.GetController(IPanelManager.class).OpenPanel(PanelType.SalerPanel);
         }
     }
 

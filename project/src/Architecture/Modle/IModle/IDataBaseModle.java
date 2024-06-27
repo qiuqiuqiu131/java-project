@@ -12,7 +12,7 @@ public interface IDataBaseModle extends IModle {
     ClientData GetClient(String name);
 
     // 注册客户
-    boolean ClientAdd(String name, String password);
+    void ClientAdd(String name, String password) throws Exception;
 
     // 注销客户
     void ClientLogout(String name);
@@ -24,7 +24,7 @@ public interface IDataBaseModle extends IModle {
     SalerData GetSaler(String name);
 
     // 注册销售员
-    boolean SalerAdd(String name, String passString);
+    void SalerAdd(String name, String passString) throws Exception;
 
     // 注销销售员
     void SalerLogout(String name);

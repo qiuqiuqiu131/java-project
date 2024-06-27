@@ -30,6 +30,15 @@ public interface IArchitecture {
      */
     <T extends IModle> void RegisterModle(Class<T> clz, T obj);
 
+    /**
+     * 注册Utility
+     * 
+     * @param <T> 模块类型必须继承自IUtility接口
+     * @param clz 模块类型
+     * @param obj 模块实例
+     */
+    <T extends IUtility> void RegisterUtility(Class<T> clz, T obj);
+
     /* 获取模块 */
 
     /**
@@ -49,6 +58,15 @@ public interface IArchitecture {
      * @return 模块实例
      */
     <T extends IModle> T GetModle(Class<T> clz);
+
+    /**
+     * 获取Utility
+     * 
+     * @param <T> 模块类型必须继承自IUtility接口
+     * @param clz 模块类型
+     * @return 模块实例
+     */
+    <T extends IUtility> T GetUtility(Class<T> clz);
 
     /* 事件 */
 

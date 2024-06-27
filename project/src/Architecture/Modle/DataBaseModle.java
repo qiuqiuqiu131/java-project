@@ -51,17 +51,15 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
     }
 
     @Override
-    public boolean ClientAdd(String name, String password) {
+    public void ClientAdd(String name, String password) throws Exception {
         String sql = "INSERT INTO client(name,password) VALUES(?,?)";
         try (PreparedStatement pStatement = dbConnection.GetConn().prepareStatement(sql)) {
             pStatement.setString(1, name);
             pStatement.setString(2, password);
 
             pStatement.executeUpdate();
-
-            return true;
         } catch (Exception e) {
-            return false;
+            throw e;
         }
     }
 
@@ -103,17 +101,15 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
     }
 
     @Override
-    public boolean SalerAdd(String name, String password) {
+    public void SalerAdd(String name, String password) throws Exception {
         String sql = "INSERT INTO saler(name,password) VALUES(?,?)";
         try (PreparedStatement pStatement = dbConnection.GetConn().prepareStatement(sql)) {
             pStatement.setString(1, name);
             pStatement.setString(2, password);
 
             pStatement.executeUpdate();
-
-            return true;
         } catch (Exception e) {
-            return false;
+            throw e;
         }
     }
 

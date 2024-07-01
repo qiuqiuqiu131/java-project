@@ -21,6 +21,7 @@ public class InputManager extends AbstractController implements IInputManager {
         tips.put(PrintGrade.Error, "错误: ");
         tips.put(PrintGrade.Execute, "执行: ");
         tips.put(PrintGrade.Imforation, "消息: ");
+        tips.put(PrintGrade.Null, "");
     }
 
     @Override
@@ -42,7 +43,11 @@ public class InputManager extends AbstractController implements IInputManager {
     public void PrintLine(PrintGrade printGrade, String mess) {
         Space();
         String res = tips.get(printGrade) + mess;
-        System.out.println(res);
+        if (printGrade == PrintGrade.Execute) {
+            System.out.print(res);
+            GetInputLine();
+        } else
+            System.out.println(res);
     }
 
     @Override
@@ -50,6 +55,8 @@ public class InputManager extends AbstractController implements IInputManager {
         Space();
         String res = tips.get(printGrade) + mess;
         System.out.print(res);
+        if (printGrade == PrintGrade.Execute)
+            GetInputLine();
     }
 
 }

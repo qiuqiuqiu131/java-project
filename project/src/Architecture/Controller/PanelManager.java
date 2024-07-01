@@ -66,7 +66,7 @@ public class PanelManager
             getPanel(panelType);
         }
 
-        OpenPanel(PanelType.MainPanel);
+        panelStack.push(PanelType.MainPanel);
     }
 
     @Override

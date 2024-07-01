@@ -3,9 +3,9 @@ package Architecture.View.Panel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import Architecture.Command.SalerLoginCommand;
-import Architecture.Command.SalerLogoutCommand;
-import Architecture.Command.SalerRegisterCommand;
+import Architecture.Command.Log.SalerLoginCommand;
+import Architecture.Command.Log.SalerLogoutCommand;
+import Architecture.Command.Log.SalerRegisterCommand;
 import Architecture.Controller.IController.IInputManager;
 
 /**

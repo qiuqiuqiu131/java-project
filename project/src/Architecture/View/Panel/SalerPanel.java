@@ -3,6 +3,7 @@ package Architecture.View.Panel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import Architecture.Command.Saler.SalerGetItemCommand;
 import Architecture.Event.SalerEnterEvent;
 import Tool.framework.Event.IEventListener;
 
@@ -24,13 +25,13 @@ public class SalerPanel
         this.RegisterEvent(SalerEnterEvent.class, this);
     }
 
-    @SuppressWarnings("unused")
-    private void Command1() {
-
-    }
-
     @Override
     public void Invoke(SalerEnterEvent obj) {
         panelName = "销售员界面 (" + obj.Name + ")";
+    }
+
+    @SuppressWarnings("unused")
+    private void Command1() {
+        this.SendCommand(new SalerGetItemCommand());
     }
 }

@@ -34,7 +34,7 @@ public class BasePanel extends AbstractView {
      * @return 返回命令数量
      */
     public int ShowView() {
-        System.out.println("");
+        System.out.println();
         System.out.println("**********");
         System.out.println(panelName);
         System.out.println("--------------------");

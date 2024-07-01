@@ -1,20 +1,21 @@
-package Architecture.Command;
+package Architecture.Command.Log;
 
 import Architecture.Controller.PrintGrade;
 import Architecture.Controller.IController.IInputManager;
 import Architecture.Modle.IModle.IDataBaseModle;
 import Architecture.Utility.IEncodeUtility;
-import Tool.Database.Class.ClientData;
+import Tool.Database.Class.SalerData;
 import Tool.framework.Abstract.AbstractCommand;
 
 /**
- * 客户注销命令
+ * 销售员注销接口
  */
-public class ClientLogoutCommand extends AbstractCommand {
+public class SalerLogoutCommand extends AbstractCommand {
+
     public String Name;
     public String Password;
 
-    public ClientLogoutCommand(String Name, String Password) {
+    public SalerLogoutCommand(String Name, String Password) {
         this.Name = Name;
         this.Password = Password;
     }
@@ -25,13 +26,13 @@ public class ClientLogoutCommand extends AbstractCommand {
         IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
         if (!dBaseModle.ClientContained(Name)) {
-            inputMgr.PrintLine(PrintGrade.Error, "客户不存在");
+            inputMgr.PrintLine(PrintGrade.Error, "销售员不存在");
         } else {
-            ClientData data = dBaseModle.GetClient(Name);
+            SalerData data = dBaseModle.GetSaler(Name);
             String decodePwd = this.GetUtility(IEncodeUtility.class).decode(data.Password, "加密");
             if (data.Password.equals(decodePwd)) {
-                dBaseModle.ClientLogout(Name);
-                inputMgr.PrintLine(PrintGrade.Imforation, "客户注销成功");
+                dBaseModle.SalerLogout(Name);
+                inputMgr.PrintLine(PrintGrade.Imforation, "销售员注销成功");
             } else {
                 inputMgr.PrintLine(PrintGrade.Error, "密码错误");
             }

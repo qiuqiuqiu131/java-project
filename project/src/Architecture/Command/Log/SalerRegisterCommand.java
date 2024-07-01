@@ -1,4 +1,4 @@
-package Architecture.Command;
+package Architecture.Command.Log;
 
 import Architecture.Controller.PrintGrade;
 import Architecture.Controller.IController.IInputManager;

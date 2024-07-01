@@ -1,21 +1,23 @@
-package Architecture.Command;
+package Architecture.Command.Log;
 
 import Architecture.Controller.PrintGrade;
 import Architecture.Controller.IController.IInputManager;
+import Architecture.Controller.IController.IPanelManager;
+import Architecture.Event.ClientEnterEvent;
 import Architecture.Modle.IModle.IDataBaseModle;
 import Architecture.Utility.IEncodeUtility;
-import Tool.Database.Class.SalerData;
+import Architecture.View.PanelType;
+import Tool.Database.Class.ClientData;
 import Tool.framework.Abstract.AbstractCommand;
 
 /**
- * 销售员注销接口
+ * 销售员登录命令
  */
-public class SalerLogoutCommand extends AbstractCommand {
-
+public class SalerLoginCommand extends AbstractCommand {
     public String Name;
     public String Password;
 
-    public SalerLogoutCommand(String Name, String Password) {
+    public SalerLoginCommand(String Name, String Password) {
         this.Name = Name;
         this.Password = Password;
     }
@@ -26,13 +28,17 @@ public class SalerLogoutCommand extends AbstractCommand {
         IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
         if (!dBaseModle.ClientContained(Name)) {
-            inputMgr.PrintLine(PrintGrade.Error, "销售员不存在");
+            inputMgr.PrintLine(PrintGrade.Error, "销售员不存在,请先注册");
         } else {
-            SalerData data = dBaseModle.GetSaler(Name);
+            ClientData data = dBaseModle.GetClient(Name);
             String decodePwd = this.GetUtility(IEncodeUtility.class).decode(data.Password, "加密");
-            if (data.Password.equals(decodePwd)) {
-                dBaseModle.SalerLogout(Name);
-                inputMgr.PrintLine(PrintGrade.Imforation, "销售员注销成功");
+            if (Password.equals(decodePwd)) {
+                this.SendEvent(new ClientEnterEvent(Name));
+
+                inputMgr.PrintLine(PrintGrade.Imforation, "销售员登录成功");
+
+                this.GetController(IPanelManager.class).ClosePanel();
+                this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientPanel);
             } else {
                 inputMgr.PrintLine(PrintGrade.Error, "密码错误");
             }

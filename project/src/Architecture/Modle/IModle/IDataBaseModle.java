@@ -1,7 +1,13 @@
 package Architecture.Modle.IModle;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
 import Tool.Database.Class.ClientData;
+import Tool.Database.Class.ClientRecord;
 import Tool.Database.Class.SalerData;
+import Tool.Database.Class.SalerRecord;
 import Tool.framework.Interface.IModle;
 
 public interface IDataBaseModle extends IModle {
@@ -28,4 +34,12 @@ public interface IDataBaseModle extends IModle {
 
     // 注销销售员
     void SalerLogout(String name);
+
+    // 获取客户信息
+    List<ClientRecord> GetClientRecord() throws SQLException;
+
+    // 获取销售员信息
+    List<SalerRecord> GetSalerRecord() throws SQLException;
+
+    ResultSet ExecuteQuery(String sql) throws SQLException;
 }

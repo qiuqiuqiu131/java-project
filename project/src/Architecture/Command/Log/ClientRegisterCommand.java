@@ -1,4 +1,4 @@
-package Architecture.Command;
+package Architecture.Command.Log;
 
 import Architecture.Controller.PrintGrade;
 import Architecture.Controller.IController.IInputManager;
@@ -7,17 +7,16 @@ import Architecture.Event.ClientEnterEvent;
 import Architecture.Modle.IModle.IDataBaseModle;
 import Architecture.Utility.IEncodeUtility;
 import Architecture.View.PanelType;
-import Tool.Database.Class.ClientData;
 import Tool.framework.Abstract.AbstractCommand;
 
 /**
- * 客户登录命令
+ * 客户注册命令
  */
-public class ClientLoginCommand extends AbstractCommand {
+public class ClientRegisterCommand extends AbstractCommand {
     public String Name;
     public String Password;
 
-    public ClientLoginCommand(String Name, String Password) {
+    public ClientRegisterCommand(String Name, String Password) {
         this.Name = Name;
         this.Password = Password;
     }
@@ -27,20 +26,21 @@ public class ClientLoginCommand extends AbstractCommand {
         IInputManager inputMgr = this.GetController(IInputManager.class);
         IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
-        if (!dBaseModle.ClientContained(Name)) {
-            inputMgr.PrintLine(PrintGrade.Error, "客户不存在,请先注册");
+        if (dBaseModle.ClientContained(Name)) {
+            inputMgr.PrintLine(PrintGrade.Error, "用户名已存在");
         } else {
-            ClientData data = dBaseModle.GetClient(Name);
-            String decodePwd = this.GetUtility(IEncodeUtility.class).decode(data.Password, "加密");
-            if (Password.equals(decodePwd)) {
-                this.SendEvent(new ClientEnterEvent(Name));
+            // 密码加密
+            String encodePwd = this.GetUtility(IEncodeUtility.class).encode(Password, "加密");
+            try {
+                dBaseModle.ClientAdd(Name, encodePwd);
 
-                inputMgr.PrintLine(PrintGrade.Imforation, "客户登录成功");
+                this.SendEvent(new ClientEnterEvent(Name));
+                inputMgr.PrintLine(PrintGrade.Imforation, "客户注册成功");
 
                 this.GetController(IPanelManager.class).ClosePanel();
                 this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientPanel);
-            } else {
-                inputMgr.PrintLine(PrintGrade.Error, "密码错误");
+            } catch (Exception e) {
+                inputMgr.PrintLine(PrintGrade.Error, "注册失败");
             }
         }
     }

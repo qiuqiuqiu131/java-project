@@ -8,6 +8,8 @@ import Tool.framework.Interface.ICommand;
 import Tool.framework.Interface.IController;
 import Tool.framework.Interface.IModle;
 import Tool.framework.Interface.IResCommand;
+import Tool.framework.Interface.IUtility;
+import Tool.framework.Interface.Functional.ICanInit;
 
 /**
  * 框架虚基类
@@ -23,7 +25,7 @@ public abstract class AbstractArchitecture implements IArchitecture {
     /* 事件系统 */
     private EventSystem mEventSystem;
 
-    public AbstractArchitecture() {
+    protected AbstractArchitecture() {
         mEventSystem = new EventSystem();
         mContainer = new IOCContainer();
         Init();
@@ -59,18 +61,25 @@ public abstract class AbstractArchitecture implements IArchitecture {
 
         mContainer.Register(clz, obj);
 
-        if (mInited) {
-            obj.Init();
+        if (mInited && obj instanceof ICanInit) {
+            ((ICanInit) obj).Init();
         }
     }
 
     public <T extends IModle> void RegisterModle(Class<T> clz, T obj) {
         obj.SetArcitecture(this);
-
         mContainer.Register(clz, obj);
 
-        if (mInited) {
-            obj.Init();
+        if (mInited && obj instanceof ICanInit) {
+            ((ICanInit) obj).Init();
+        }
+    }
+
+    public <T extends IUtility> void RegisterUtility(Class<T> clz, T obj) {
+        mContainer.Register(clz, obj);
+
+        if (mInited && obj instanceof ICanInit) {
+            ((ICanInit) obj).Init();
         }
     }
 
@@ -79,6 +88,10 @@ public abstract class AbstractArchitecture implements IArchitecture {
     }
 
     public <T extends IModle> T GetModle(Class<T> clz) {
+        return mContainer.Get(clz);
+    }
+
+    public <T extends IUtility> T GetUtility(Class<T> clz) {
         return mContainer.Get(clz);
     }
 

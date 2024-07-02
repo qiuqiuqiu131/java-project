@@ -3,7 +3,7 @@ package Architecture.View.Panel;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import Architecture.Controller.IPanelManager;
+import Architecture.Controller.IController.IPanelManager;
 import Architecture.View.PanelType;
 
 /**
@@ -11,6 +11,8 @@ import Architecture.View.PanelType;
  */
 public class MainPanel extends BasePanel {
     public MainPanel() {
+        super();
+
         panelName = "主界面";
         commandList = new ArrayList<>(Arrays.asList(
                 "管理",

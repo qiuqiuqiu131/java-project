@@ -3,9 +3,9 @@ package Architecture.View.Panel;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import Architecture.Controller.IInputManager;
-import Architecture.Controller.IPanelManager;
 import Architecture.Controller.PrintGrade;
+import Architecture.Controller.IController.IInputManager;
+import Architecture.Controller.IController.IPanelManager;
 import Tool.framework.Abstract.AbstractView;
 
 /**
@@ -21,13 +21,20 @@ public class BasePanel extends AbstractView {
     public String panelName;
     protected List<String> commandList;
 
+    public BasePanel() {
+        Init();
+    }
+
+    protected void Init() {
+    }
+
     /**
      * 用于面板的显示
      * 
      * @return 返回命令数量
      */
     public int ShowView() {
-        System.out.println("");
+        System.out.println();
         System.out.println("**********");
         System.out.println(panelName);
         System.out.println("--------------------");
@@ -81,9 +88,5 @@ public class BasePanel extends AbstractView {
     protected void Back() {
         this.GetController(IInputManager.class).PrintLine(PrintGrade.Execute, "界面返回");
         this.GetController(IPanelManager.class).ClosePanel();
-    }
-
-    @Override
-    protected void OnInit() {
     }
 }

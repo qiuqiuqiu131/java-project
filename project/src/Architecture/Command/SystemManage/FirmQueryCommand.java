@@ -21,9 +21,13 @@ public class FirmQueryCommand extends AbstractCommand {
 
             inputManager.Space();
             System.out.println("--------厂商查询--------");
-            System.out.println("厂商\t地址");
-            for (FirmRecord c : list) {
-                System.out.println(String.format("%s\t%s", c.Name, c.Location));
+            if (list.size() == 0) {
+                System.out.println("暂无数据");
+            } else {
+                System.out.println("厂商\t地址");
+                for (FirmRecord c : list) {
+                    System.out.println(String.format("%s\t%s", c.Name, c.Location));
+                }
             }
             System.out.println("-----------------------");
             inputManager.GetInputLine();

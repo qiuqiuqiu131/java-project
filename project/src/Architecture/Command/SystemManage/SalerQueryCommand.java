@@ -21,9 +21,13 @@ public class SalerQueryCommand extends AbstractCommand {
 
             inputManager.Space();
             System.out.println("--------销售员查询--------");
-            System.out.println("销售员\t推销数量");
-            for (SalerRecord c : list) {
-                System.out.println(String.format("%s\t%s", c.Name, c.SaleCount));
+            if (list.size() == 0) {
+                System.out.println("暂无数据");
+            } else {
+                System.out.println("销售员\t推销数量");
+                for (SalerRecord c : list) {
+                    System.out.println(String.format("%s\t%s", c.Name, c.SaleCount));
+                }
             }
             System.out.println("-----------------------");
             inputManager.GetInputLine();

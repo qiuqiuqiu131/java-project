@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import Architecture.Command.SystemManage.ClientQueryCommand;
+import Architecture.Command.SystemManage.FirmQueryCommand;
 import Architecture.Command.SystemManage.SalerQueryCommand;
 
 /**
@@ -38,6 +39,6 @@ public class SystemManagerPanel extends BasePanel {
 
     @SuppressWarnings("unused")
     private void Command4() {
-
+        this.SendCommand(new FirmQueryCommand());
     }
 }

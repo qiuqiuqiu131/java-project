@@ -11,6 +11,7 @@ import Architecture.Modle.IModle.IDataBaseModle;
 import Tool.Database.DBConnection;
 import Tool.Database.Class.ClientData;
 import Tool.Database.Class.ClientRecord;
+import Tool.Database.Class.FirmRecord;
 import Tool.Database.Class.SalerData;
 import Tool.Database.Class.SalerRecord;
 import Tool.framework.Abstract.AbstractModle;
@@ -150,6 +151,20 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
             String Name = res.getString("name");
             int Count = res.getInt("count");
             SalerRecord cRecord = new SalerRecord(Name, Count);
+            list.add(cRecord);
+        }
+        return list;
+    }
+
+    @Override
+    public List<FirmRecord> GetFirmRecord() throws SQLException {
+        String sql = "SELECT * FROM firm";
+        List<FirmRecord> list = new ArrayList<FirmRecord>();
+        ResultSet res = ExecuteQuery(sql);
+        while (res.next()) {
+            String Name = res.getString("name");
+            String Location = res.getString("location");
+            FirmRecord cRecord = new FirmRecord(Name, Location);
             list.add(cRecord);
         }
         return list;

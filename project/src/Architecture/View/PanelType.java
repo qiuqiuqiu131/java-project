@@ -16,4 +16,5 @@ public enum PanelType {
     ClientLogPanel,
     SalerLogPanel,
     SystemManagerPanel,
+    SearchSoftWarePanel
 }

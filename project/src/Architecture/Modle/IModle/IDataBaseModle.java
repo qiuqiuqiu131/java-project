@@ -9,6 +9,8 @@ import Tool.Database.Class.ClientRecord;
 import Tool.Database.Class.FirmRecord;
 import Tool.Database.Class.SalerData;
 import Tool.Database.Class.SalerRecord;
+import Tool.Database.Class.SoftwareData;
+import Tool.Database.Class.SoftwareRecord;
 import Tool.framework.Interface.IModle;
 
 public interface IDataBaseModle extends IModle {
@@ -44,6 +46,11 @@ public interface IDataBaseModle extends IModle {
 
     // 获取厂商信息
     List<FirmRecord> GetFirmRecord() throws SQLException;
+
+    boolean SoftwareContained(String name);
+    void ItemAdd(String itemname,String clientName,String salername) throws Exception;
+    List<SoftwareRecord> GetSoftwareRecord() throws SQLException;
+    List<SoftwareData> GetSoftwareData() throws SQLException;
 
     ResultSet ExecuteQuery(String sql) throws SQLException;
 }

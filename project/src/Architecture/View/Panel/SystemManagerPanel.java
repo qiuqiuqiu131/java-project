@@ -6,6 +6,7 @@ import java.util.Arrays;
 import Architecture.Command.SystemManage.ClientQueryCommand;
 import Architecture.Command.SystemManage.FirmQueryCommand;
 import Architecture.Command.SystemManage.SalerQueryCommand;
+import Architecture.Command.SystemManage.SoftwareQueryCommand;
 
 /**
  * 系统管理面板
@@ -34,7 +35,7 @@ public class SystemManagerPanel extends BasePanel {
 
     @SuppressWarnings("unused")
     private void Command3() {
-
+        this.SendCommand(new SoftwareQueryCommand());
     }
 
     @SuppressWarnings("unused")

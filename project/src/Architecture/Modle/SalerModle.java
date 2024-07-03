@@ -32,9 +32,9 @@ public class SalerModle extends AbstractModle
         IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
         String Sql = String.format(
-                "SELECT i.itemname name, s.belong firmname, s.price price, i.date date,i.clientname clientname " + //
-                        "FROM item i JOIN software s on i.itemname = s.name " + //
-                        "WHERE i.clientname = '%s'",
+                "SELECT itemname, price, belong, clientname, date " + //
+                        "FROM item " + //
+                        "WHERE salername = '%s'",
                 Name);
         try {
             ResultSet res = dBaseModle.ExecuteQuery(Sql);
@@ -42,12 +42,11 @@ public class SalerModle extends AbstractModle
 
             while (res.next()) {
                 ItemData itemData = new ItemData();
+                itemData.itemName = res.getString("itemname");
+                itemData.Price = res.getInt("price");
+                itemData.Belong = res.getString("belong");
                 itemData.clientName = res.getString("clientname");
                 itemData.Date = res.getString("date");
-                itemData.firmName = res.getString("belong");
-                itemData.price = res.getInt("price");
-                itemData.itemName = res.getString("name");
-
                 result.add(itemData);
             }
             return result;

@@ -3,11 +3,11 @@ package Architecture.Command.Log;
 import Architecture.Controller.PrintGrade;
 import Architecture.Controller.IController.IInputManager;
 import Architecture.Controller.IController.IPanelManager;
-import Architecture.Event.ClientEnterEvent;
+import Architecture.Event.SalerEnterEvent;
 import Architecture.Modle.IModle.IDataBaseModle;
 import Architecture.Utility.IEncodeUtility;
 import Architecture.View.PanelType;
-import Tool.Database.Class.ClientData;
+import Tool.Database.Class.SalerData;
 import Tool.framework.Abstract.AbstractCommand;
 
 /**
@@ -27,13 +27,13 @@ public class SalerLoginCommand extends AbstractCommand {
         IInputManager inputMgr = this.GetController(IInputManager.class);
         IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
-        if (!dBaseModle.ClientContained(Name)) {
+        if (!dBaseModle.SalerContained(Name)) {
             inputMgr.PrintLine(PrintGrade.Error, "销售员不存在,请先注册");
         } else {
-            ClientData data = dBaseModle.GetClient(Name);
+            SalerData data = dBaseModle.GetSaler(Name);
             String decodePwd = this.GetUtility(IEncodeUtility.class).decode(data.Password, "加密");
             if (Password.equals(decodePwd)) {
-                this.SendEvent(new ClientEnterEvent(Name));
+                this.SendEvent(new SalerEnterEvent(Name));
 
                 inputMgr.PrintLine(PrintGrade.Imforation, "销售员登录成功");
 

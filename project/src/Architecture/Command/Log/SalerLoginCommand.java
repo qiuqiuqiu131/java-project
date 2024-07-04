@@ -38,11 +38,10 @@ public class SalerLoginCommand extends AbstractCommand {
                 inputMgr.PrintLine(PrintGrade.Imforation, "销售员登录成功");
 
                 this.GetController(IPanelManager.class).ClosePanel();
-                this.GetController(IPanelManager.class).OpenPanel(PanelType.ClientPanel);
+                this.GetController(IPanelManager.class).OpenPanel(PanelType.SalerPanel);
             } else {
                 inputMgr.PrintLine(PrintGrade.Error, "密码错误");
             }
         }
     }
-
 }

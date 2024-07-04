@@ -53,7 +53,10 @@ public interface IDataBaseModle extends IModle {
 
     List<SoftwareRecord> GetSoftwareRecord() throws SQLException;
 
-    List<SoftwareData> GetSoftwareData() throws SQLException;
+    List<SoftwareData> GetSoftwareDataByDescription(String description) throws SQLException;
+
+    List<SoftwareData> GetSoftwareDataByFirmname(String firmname) throws SQLException;
+
 
     ResultSet ExecuteQuery(String sql) throws SQLException;
 }

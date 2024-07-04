@@ -22,7 +22,7 @@ public class ClientGetSoftwareByDescriptionCommand extends AbstractResCommand<Se
         IInputManager inputManager=this.GetController(IInputManager.class);
         SearchDataReturn temp=new SearchDataReturn();
         try {
-            List<SoftwareData> list=dataBaseModle.GetSoftwareData();
+            List<SoftwareData> list=dataBaseModle.GetSoftwareDataByDescription(Description);
             inputManager.Space();
             System.out.println("--------查询结果--------");
             if (list.size() == 0) {
@@ -30,11 +30,8 @@ public class ClientGetSoftwareByDescriptionCommand extends AbstractResCommand<Se
             } else {
                 System.out.println("软件名\t出厂商\t价格");
                 for (SoftwareData c : list) {
-                    if(c.Description==this.Description){
-                        System.out.println("Enter");
                         temp.list.add(c);
-                        System.out.println(String.format("%s\t%s\t%d\t%s",c.Name,c.Belong,c.Price));
-                    }
+                        System.out.println(String.format("%s\t%s\t%d",c.Name,c.Belong,c.Price));
                 }
             }
             System.out.println("-----------------------");

@@ -29,9 +29,10 @@ public class SalerRegisterCommand extends AbstractCommand {
         if (dBaseModle.SalerContained(Name)) {
             inputMgr.PrintLine(PrintGrade.Error, "用户名已存在");
         } else {
-            String encodePwd = this.GetUtility(IEncodeUtility.class).encode("加密", Password);
+            // String encodePwd = this.GetUtility(IEncodeUtility.class).encode("加密",
+            // Password);
             try {
-                dBaseModle.SalerAdd(Name, encodePwd);
+                dBaseModle.SalerAdd(Name, Password);
 
                 this.SendEvent(new SalerEnterEvent(Name));
                 inputMgr.PrintLine(PrintGrade.Imforation, "销售员注册成功");

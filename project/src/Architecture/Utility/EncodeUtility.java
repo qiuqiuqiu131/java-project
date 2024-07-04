@@ -22,7 +22,7 @@ public class EncodeUtility implements IEncodeUtility {
             SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
 
             // 创建密码器
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
             cipher.init(Cipher.ENCRYPT_MODE, key);
             byte[] byteContent = str.getBytes();
             result = cipher.doFinal(byteContent);
@@ -48,7 +48,7 @@ public class EncodeUtility implements IEncodeUtility {
             SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
 
             // 创建密码器
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
             cipher.init(Cipher.DECRYPT_MODE, key);
             result = cipher.doFinal(content);
 

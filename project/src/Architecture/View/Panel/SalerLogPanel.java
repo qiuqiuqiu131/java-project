@@ -7,20 +7,19 @@ import Architecture.Command.Log.SalerLoginCommand;
 import Architecture.Command.Log.SalerLogoutCommand;
 import Architecture.Command.Log.SalerRegisterCommand;
 import Architecture.Controller.IController.IInputManager;
-import Architecture.Event.SalerEnterEvent;
-import Tool.framework.Event.IEventListener;
 
 /**
  * 销售员登录面板
  */
-public class SalerLogPanel extends BasePanel implements IEventListener<SalerEnterEvent> {
+public class SalerLogPanel extends BasePanel {
     public SalerLogPanel() {
         super();
 
         panelName = "销售员登录界面";
         commandList = new ArrayList<>(Arrays.asList(
                 "登录",
-                "注册"));
+                "注册",
+                "注销"));
     }
 
     @SuppressWarnings("unused")
@@ -84,10 +83,5 @@ public class SalerLogPanel extends BasePanel implements IEventListener<SalerEnte
 
         // 发送销售员注销命令
         this.SendCommand(new SalerLogoutCommand(salerName, salerPassword));
-    }
-
-    @Override
-    public void Invoke(SalerEnterEvent obj) {
-        panelName = "销售员登录界面 (" + obj.Name + ")";
     }
 }

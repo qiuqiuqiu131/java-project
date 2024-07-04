@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class DBConnection {
     private final static String userName = "root";
-    private final static String password = "Wfy0402.13";
+    private final static String password = "123456";
     private final static String url = "jdbc:mysql://localhost:3306/sw_system";
 
     private Connection conn = null;

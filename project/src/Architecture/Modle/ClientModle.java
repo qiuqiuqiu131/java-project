@@ -33,8 +33,8 @@ public class ClientModle
         IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
         String Sql = String.format(
-                "SELECT itemname, price, belong, salername, date " + //
-                        "FROM item " + //
+                "SELECT i.itemname itemname, s.price price, s.belong belong, i.salername salername, i.date date\n" + //
+                        "FROM item i JOIN software s on i.itemname = s.name\n" + //
                         "WHERE clientname = '%s'",
                 Name);
         try {
@@ -44,9 +44,9 @@ public class ClientModle
             while (res.next()) {
                 ItemData itemData = new ItemData();
                 itemData.itemName = res.getString("itemname");
-                itemData.Price = res.getInt("price");
-                itemData.Belong = res.getString("belong");
                 itemData.salerName = res.getString("salername");
+                itemData.Belong = res.getString("belong");
+                itemData.Price = res.getInt("price");
                 itemData.Date = res.getString("date");
                 result.add(itemData);
             }
@@ -60,5 +60,5 @@ public class ClientModle
     public String GetClinetName() {
         return Name;
     }
-    
+
 }

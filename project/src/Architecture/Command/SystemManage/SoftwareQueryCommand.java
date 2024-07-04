@@ -12,20 +12,20 @@ import Tool.framework.Abstract.AbstractCommand;
 public class SoftwareQueryCommand extends AbstractCommand {
     @Override
     protected void OnExecute() {
-        IDataBaseModle dataBaseModle=this.GetModle(IDataBaseModle.class);
-        IInputManager inputManager=this.GetController(IInputManager.class);
+        IDataBaseModle dataBaseModle = this.GetModle(IDataBaseModle.class);
+        IInputManager inputManager = this.GetController(IInputManager.class);
 
         try {
-            List<SoftwareRecord> list=dataBaseModle.GetSoftwareRecord();
+            List<SoftwareRecord> list = dataBaseModle.GetSoftwareRecord();
 
             inputManager.Space();
             System.out.println("--------软件查询--------");
             if (list.size() == 0) {
                 System.out.println("暂无数据");
             } else {
-                System.out.println("软件名\t销量");
+                System.out.println("软件名\t\t销量");
                 for (SoftwareRecord c : list) {
-                    System.out.println(String.format("%s\t%s", c.Name, c.SaleVolume));
+                    System.out.println(String.format("%s\t\t%s", c.Name, c.SaleVolume));
                 }
             }
             System.out.println("-----------------------");
@@ -35,5 +35,5 @@ public class SoftwareQueryCommand extends AbstractCommand {
             inputManager.PrintLine(PrintGrade.Error, "查询失败");
         }
     }
-    
+
 }

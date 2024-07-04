@@ -50,7 +50,8 @@ public interface IDataBaseModle extends IModle {
     boolean SoftwareContained(String name);
     void ItemAdd(String itemname,String clientName,String salername) throws Exception;
     List<SoftwareRecord> GetSoftwareRecord() throws SQLException;
-    List<SoftwareData> GetSoftwareData() throws SQLException;
+    List<SoftwareData> GetSoftwareDataBydescription(String description) throws SQLException;
+    List<SoftwareData> GetSoftwareDataByfirmname(String firmname) throws SQLException;
 
     ResultSet ExecuteQuery(String sql) throws SQLException;
 }

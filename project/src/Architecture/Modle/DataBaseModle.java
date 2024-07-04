@@ -186,30 +186,20 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
     }
     @Override
     public void ItemAdd(String itemname,String clientname,String salername) throws Exception{
-            int Price;
-            String Belong;
+        DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime=LocalDateTime.now();
+        String Date=dateTime.format(formatter);
 
-            String sql=String.format("select price,belong from software where name='%s'", itemname);
-            ResultSet res=ExecuteQuery(sql);
-            Price=res.getInt("price");
-            Belong=res.getString("belong");
-
-            DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            LocalDateTime dateTime=LocalDateTime.now();
-            String Date=dateTime.format(formatter);
-
-            sql="insert into item(itemname,clientname,salername,price,date,belong) values(?,?,?,?,?,?)";
-            try(PreparedStatement pStatement = dbConnection.GetConn().prepareStatement(sql)) {
-                pStatement.setString(1,itemname);
-                pStatement.setString(2,clientname);
-                pStatement.setString(3, salername);
-                pStatement.setInt(4, Price);
-                pStatement.setString(5, Date);
-                pStatement.setString(6, Belong);
-                pStatement.executeUpdate();
-            } catch (Exception e) {
-                throw e;
-            }
+        String sql="insert into item(clientname,salername,itemname,date) values(?,?,?,?)";
+        try(PreparedStatement pStatement=dbConnection.GetConn().prepareStatement(sql)) {
+            pStatement.setString(1,clientname);
+            pStatement.setString(2,salername);
+            pStatement.setString(3, itemname);
+            pStatement.setString(4, Date);
+            pStatement.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        }
     }
     @Override
     public List<SoftwareRecord> GetSoftwareRecord() throws SQLException{
@@ -225,8 +215,8 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
         return list;
     }
     @Override
-    public List<SoftwareData> GetSoftwareData() throws SQLException{
-        String sql="select * from software";
+    public List<SoftwareData> GetSoftwareDataBydescription(String description) throws SQLException{
+        String sql=String.format("select * from software where description='%s'",description);
         List<SoftwareData> list=new ArrayList<SoftwareData>();
         ResultSet res=ExecuteQuery(sql);
         while(res.next()){
@@ -234,13 +224,26 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
             String Belong=res.getString("belong");
             int Price=res.getInt("price");
             int Cost=res.getInt("cost");
-            String Description=res.getString("description");
-            SoftwareData cRecord=new SoftwareData(Name, Belong, Price, Cost, Description);
+            SoftwareData cRecord=new SoftwareData(Name, Belong, Price, Cost, description);
             list.add(cRecord);
         }
         return list;
     }
-
+    @Override
+    public List<SoftwareData> GetSoftwareDataByfirmname(String firmname) throws SQLException{
+        String sql=String.format("select * from software where belong='%s'",firmname);
+        List<SoftwareData> list=new ArrayList<SoftwareData>();
+        ResultSet res=ExecuteQuery(sql);
+        while(res.next()){
+            String Name=res.getString("name");
+            int Price=res.getInt("price");
+            int Cost=res.getInt("cost");
+            String Description=res.getString("description");
+            SoftwareData cRecord=new SoftwareData(Name, firmname, Price, Cost, Description);
+            list.add(cRecord);
+        }
+        return list;
+    }
     @Override
     public ResultSet ExecuteQuery(String sql) throws SQLException {
         Statement statement = dbConnection.GetConn().createStatement();

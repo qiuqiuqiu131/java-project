@@ -24,6 +24,7 @@ public class SearchSoftWarePanel extends BasePanel{
         description=inputmgr.GetInputLine();
 
         SearchDataReturn temp=this.SendCommand(new ClientGetSoftwareByDescriptionCommand(description));
+        
     }
 
     @SuppressWarnings("unused")

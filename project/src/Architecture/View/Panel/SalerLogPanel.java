@@ -18,7 +18,8 @@ public class SalerLogPanel extends BasePanel {
         panelName = "销售员登录界面";
         commandList = new ArrayList<>(Arrays.asList(
                 "登录",
-                "注册"));
+                "注册",
+                "注销"));
     }
 
     @SuppressWarnings("unused")
@@ -45,7 +46,7 @@ public class SalerLogPanel extends BasePanel {
         System.out.print("用户名: ");
         salerName = inputmgr.GetInputLine();
         while (salerName.length() == 0) {
-            System.out.println("重新输入用户名: ");
+            System.out.print("重新输入用户名: ");
             salerName = inputmgr.GetInputLine();
         }
 

@@ -1,9 +1,5 @@
 package Architecture.Command.Client;
 
-import java.sql.ResultSet;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import Architecture.Controller.PrintGrade;
 import Architecture.Controller.IController.IInputManager;
 import Architecture.Modle.IModle.IClientModle;
@@ -22,7 +18,7 @@ public class PurchaseCommand extends AbstractCommand{
     protected void OnExecute(){
         IInputManager inputMgr = this.GetController(IInputManager.class);
         IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
-        if(dBaseModle.SoftwareContained(itemName)){
+        if(dBaseModle.SoftwareContained(itemName)&&dBaseModle.SalerContained(salerName)){
             String Name=this.GetModle(IClientModle.class).GetClinetName();
             try {
                 dBaseModle.ItemAdd(itemName,Name,salerName);

@@ -177,65 +177,58 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
     @Override
     public boolean SoftwareContained(String name) {
         try {
-            String sql=String.format("select * from software where name='%s'", name);
-            ResultSet res=ExecuteQuery(sql);
+            String sql = String.format("select * from software where name='%s'", name);
+            ResultSet res = ExecuteQuery(sql);
             return res.next();
         } catch (SQLException e) {
             return false;
         }
     }
+
     @Override
-    public void ItemAdd(String itemname,String clientname,String salername) throws Exception{
-            int Price;
-            String Belong;
+    public void ItemAdd(String itemname, String clientname, String salername) throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.now();
+        String Date = dateTime.format(formatter);
 
-            String sql=String.format("select price,belong from software where name='%s'", itemname);
-            ResultSet res=ExecuteQuery(sql);
-            Price=res.getInt("price");
-            Belong=res.getString("belong");
-
-            DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            LocalDateTime dateTime=LocalDateTime.now();
-            String Date=dateTime.format(formatter);
-
-            sql="insert into item(itemname,clientname,salername,price,date,belong) values(?,?,?,?,?,?)";
-            try(PreparedStatement pStatement = dbConnection.GetConn().prepareStatement(sql)) {
-                pStatement.setString(1,itemname);
-                pStatement.setString(2,clientname);
-                pStatement.setString(3, salername);
-                pStatement.setInt(4, Price);
-                pStatement.setString(5, Date);
-                pStatement.setString(6, Belong);
-                pStatement.executeUpdate();
-            } catch (Exception e) {
-                throw e;
-            }
+        String sql = "insert into item(itemname,clientname,salername,date) values(?,?,?,?)";
+        try (PreparedStatement pStatement = dbConnection.GetConn().prepareStatement(sql)) {
+            pStatement.setString(1, itemname);
+            pStatement.setString(2, clientname);
+            pStatement.setString(3, salername);
+            pStatement.setString(4, Date);
+            pStatement.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        }
     }
+
     @Override
-    public List<SoftwareRecord> GetSoftwareRecord() throws SQLException{
-        String sql="select s.name,count(i.itemname) count from software s left join item i on s.name=i.itemname group by s.name";
-        List<SoftwareRecord> list=new ArrayList<SoftwareRecord>();
-        ResultSet res=ExecuteQuery(sql);
-        while(res.next()){
-            String Name=res.getString("name");
-            int SaleVolume=res.getInt("count");
-            SoftwareRecord cRecord=new SoftwareRecord(Name,SaleVolume);
+    public List<SoftwareRecord> GetSoftwareRecord() throws SQLException {
+        String sql = "select s.name,count(i.itemname) count from software s left join item i on s.name=i.itemname group by s.name";
+        List<SoftwareRecord> list = new ArrayList<SoftwareRecord>();
+        ResultSet res = ExecuteQuery(sql);
+        while (res.next()) {
+            String Name = res.getString("name");
+            int SaleVolume = res.getInt("count");
+            SoftwareRecord cRecord = new SoftwareRecord(Name, SaleVolume);
             list.add(cRecord);
         }
         return list;
     }
+
     @Override
-    public List<SoftwareData> GetSoftwareData() throws SQLException{
-        String sql="select * from software";
-        List<SoftwareData> list=new ArrayList<SoftwareData>();
-        ResultSet res=ExecuteQuery(sql);
-        while(res.next()){
-            String Name=res.getString("name");
-            String Belong=res.getString("belong");
-            int Price=res.getInt("price");
-            int Cost=res.getInt("cost");
-            String Description=res.getString("description");
-            SoftwareData cRecord=new SoftwareData(Name, Belong, Price, Cost, Description);
+    public List<SoftwareData> GetSoftwareData() throws SQLException {
+        String sql = "select * from software";
+        List<SoftwareData> list = new ArrayList<SoftwareData>();
+        ResultSet res = ExecuteQuery(sql);
+        while (res.next()) {
+            String Name = res.getString("name");
+            String Belong = res.getString("belong");
+            int Price = res.getInt("price");
+            int Cost = res.getInt("cost");
+            String Description = res.getString("description");
+            SoftwareData cRecord = new SoftwareData(Name, Belong, Price, Cost, Description);
             list.add(cRecord);
         }
         return list;

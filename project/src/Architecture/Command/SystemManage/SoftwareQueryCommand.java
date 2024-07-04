@@ -23,9 +23,9 @@ public class SoftwareQueryCommand extends AbstractCommand {
             if (list.size() == 0) {
                 System.out.println("暂无数据");
             } else {
-                System.out.println("软件名\t\t销量");
+                System.out.println("软件名\t销量");
                 for (SoftwareRecord c : list) {
-                    System.out.println(String.format("%s\t\t%s", c.Name, c.SaleVolume));
+                    System.out.println(String.format("%s\t%s", c.Name, c.SaleVolume));
                 }
             }
             System.out.println("-----------------------");

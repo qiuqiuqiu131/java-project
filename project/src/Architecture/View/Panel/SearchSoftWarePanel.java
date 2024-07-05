@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import Architecture.Command.Client.ClientGetSoftwareByDescriptionCommand;
 import Architecture.Command.Client.ClientGetSoftwareByFirmnameCommand;
+import Architecture.Command.Client.PurchaseCommand;
 import Architecture.Command.ResultClass.SearchDataReturn;
 import Architecture.Controller.IController.IInputManager;
 
@@ -24,6 +25,16 @@ public class SearchSoftWarePanel extends BasePanel{
         description=inputmgr.GetInputLine();
 
         SearchDataReturn temp=this.SendCommand(new ClientGetSoftwareByDescriptionCommand(description));
+
+        if(temp.list.size()!=0){
+            System.out.print("输入购买序号：");
+            String str=inputmgr.GetInputLine();
+            int number=Integer.parseInt(str);
+            number--;
+            System.out.print("输入销售员：");
+            String salername=inputmgr.GetInputLine();
+            this.SendCommand(new PurchaseCommand(temp.list.get(number).Name,salername));
+        }
     }
 
     @SuppressWarnings("unused")
@@ -35,5 +46,15 @@ public class SearchSoftWarePanel extends BasePanel{
         firmname=inputmgr.GetInputLine();
 
         SearchDataReturn temp=this.SendCommand(new ClientGetSoftwareByFirmnameCommand(firmname));
+
+        if(temp.list.size()!=0){
+            System.out.print("输入购买序号：");
+            String str=inputmgr.GetInputLine();
+            int number=Integer.parseInt(str);
+            number--;
+            System.out.print("输入销售员：");
+            String salername=inputmgr.GetInputLine();
+            this.SendCommand(new PurchaseCommand(temp.list.get(number).Name,salername));
+        }
     }
 }

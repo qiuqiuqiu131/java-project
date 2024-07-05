@@ -21,6 +21,7 @@ public class ClientGetSoftwareByDescriptionCommand extends AbstractResCommand<Se
         IDataBaseModle dataBaseModle=this.GetModle(IDataBaseModle.class);
         IInputManager inputManager=this.GetController(IInputManager.class);
         SearchDataReturn temp=new SearchDataReturn();
+        int count=1;
         try {
             List<SoftwareData> list=dataBaseModle.GetSoftwareDataByDescription(Description);
             inputManager.Space();
@@ -28,9 +29,11 @@ public class ClientGetSoftwareByDescriptionCommand extends AbstractResCommand<Se
             if (list.size() == 0) {
                 System.out.println("暂无数据");
             } else {
-                System.out.println("软件名\t出厂商\t价格");
+                System.out.println("\t软件名\t出厂商\t价格");
                 for (SoftwareData c : list) {
                         temp.list.add(c);
+                        System.out.print(count+"."+"\t");
+                        count++;
                         System.out.println(String.format("%s\t%s\t%d",c.Name,c.Belong,c.Price));
                 }
             }

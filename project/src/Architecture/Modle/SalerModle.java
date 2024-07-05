@@ -31,11 +31,9 @@ public class SalerModle extends AbstractModle
     public List<ItemData> GetItemData() throws SQLException {
         IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
-        String Sql = String.format(
-                "SELECT itemname, price, belong, clientname, date " + //
-                        "FROM item " + //
-                        "WHERE salername = '%s'",
-                Name);
+        String Sql = String.format
+            ("SELECT itemname, price, belong, clientname, date "+//
+            "FROM item join software on itemname=name WHERE salername = '%s'",Name);
         try {
             ResultSet res = dBaseModle.ExecuteQuery(Sql);
             List<ItemData> result = new ArrayList<ItemData>();

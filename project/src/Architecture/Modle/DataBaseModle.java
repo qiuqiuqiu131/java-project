@@ -242,7 +242,7 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
             String Name = res.getString("name");
             int Price = res.getInt("price");
             int Cost = res.getInt("cost");
-            String Description = res.getString("belong");
+            String Description = res.getString("description");
             SoftwareData cRecord = new SoftwareData(Name, firmname, Price, Cost, Description);
             list.add(cRecord);
         }

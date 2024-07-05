@@ -30,10 +30,9 @@ public class ClientRegisterCommand extends AbstractCommand {
             inputMgr.PrintLine(PrintGrade.Error, "用户名已存在");
         } else {
             // 密码加密
-            // String encodePwd = this.GetUtility(IEncodeUtility.class).encode(Password,
-            // "加密");
+            String encodePwd = this.GetUtility(IEncodeUtility.class).encode(Password, "加密");
             try {
-                dBaseModle.ClientAdd(Name, Password);
+                dBaseModle.ClientAdd(Name, encodePwd);
 
                 this.SendEvent(new ClientEnterEvent(Name));
                 inputMgr.PrintLine(PrintGrade.Imforation, "客户注册成功");

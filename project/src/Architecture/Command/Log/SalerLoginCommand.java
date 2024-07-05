@@ -31,9 +31,8 @@ public class SalerLoginCommand extends AbstractCommand {
             inputMgr.PrintLine(PrintGrade.Error, "销售员不存在,请先注册");
         } else {
             SalerData data = dBaseModle.GetSaler(Name);
-            // String decodePwd =
-            // this.GetUtility(IEncodeUtility.class).decode(data.Password, "加密");
-            if (Password.equals(data.Password)) {
+            String decodePwd = this.GetUtility(IEncodeUtility.class).decode(data.Password, "加密");
+            if (Password.equals(decodePwd)) {
                 this.SendEvent(new SalerEnterEvent(Name));
 
                 inputMgr.PrintLine(PrintGrade.Imforation, "销售员登录成功");

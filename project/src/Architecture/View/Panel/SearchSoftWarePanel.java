@@ -27,13 +27,26 @@ public class SearchSoftWarePanel extends BasePanel{
         SearchDataReturn temp=this.SendCommand(new ClientGetSoftwareByDescriptionCommand(description));
 
         if(temp.list.size()!=0){
-            System.out.print("输入购买序号：");
-            String str=inputmgr.GetInputLine();
-            int number=Integer.parseInt(str);
-            number--;
-            System.out.print("输入销售员：");
-            String salername=inputmgr.GetInputLine();
-            this.SendCommand(new PurchaseCommand(temp.list.get(number).Name,salername));
+            while(true){
+                System.out.println("1.选择购买");
+                System.out.println("2.返回");
+                System.out.print("输入：");
+                String str=inputmgr.GetInputLine();
+                if(Integer.parseInt(str)==1){
+                    System.out.print("输入购买序号：");
+                    str=inputmgr.GetInputLine();
+                    int number=Integer.parseInt(str);
+                    number--;
+                    System.out.print("输入销售员：");
+                    String salername=inputmgr.GetInputLine();
+                    this.SendCommand(new PurchaseCommand(temp.list.get(number).Name,salername));
+                    break;
+                }
+                else if(Integer.parseInt(str)==2)
+                    break;
+                else
+                    System.out.println("输入错误");
+            }
         }
     }
 
@@ -48,13 +61,26 @@ public class SearchSoftWarePanel extends BasePanel{
         SearchDataReturn temp=this.SendCommand(new ClientGetSoftwareByFirmnameCommand(firmname));
 
         if(temp.list.size()!=0){
-            System.out.print("输入购买序号：");
-            String str=inputmgr.GetInputLine();
-            int number=Integer.parseInt(str);
-            number--;
-            System.out.print("输入销售员：");
-            String salername=inputmgr.GetInputLine();
-            this.SendCommand(new PurchaseCommand(temp.list.get(number).Name,salername));
+            while(true){
+                System.out.println("1.选择购买");
+                System.out.println("2.返回");
+                System.out.print("输入：");
+                String str=inputmgr.GetInputLine();
+                if(Integer.parseInt(str)==1){
+                    System.out.print("输入购买序号：");
+                    str=inputmgr.GetInputLine();
+                    int number=Integer.parseInt(str);
+                    number--;
+                    System.out.print("输入销售员：");
+                    String salername=inputmgr.GetInputLine();
+                    this.SendCommand(new PurchaseCommand(temp.list.get(number).Name,salername));
+                    break;
+                }
+                else if(Integer.parseInt(str)==2)
+                    break;
+                else
+                    System.out.println("输入错误");
+            }
         }
     }
 }

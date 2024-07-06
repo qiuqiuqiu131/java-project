@@ -6,8 +6,11 @@ import java.util.List;
 
 import Tool.Database.Class.ClientData;
 import Tool.Database.Class.ClientRecord;
+import Tool.Database.Class.FirmRecord;
 import Tool.Database.Class.SalerData;
 import Tool.Database.Class.SalerRecord;
+import Tool.Database.Class.SoftwareData;
+import Tool.Database.Class.SoftwareRecord;
 import Tool.framework.Interface.IModle;
 
 public interface IDataBaseModle extends IModle {
@@ -40,6 +43,20 @@ public interface IDataBaseModle extends IModle {
 
     // 获取销售员信息
     List<SalerRecord> GetSalerRecord() throws SQLException;
+
+    // 获取厂商信息
+    List<FirmRecord> GetFirmRecord() throws SQLException;
+
+    boolean SoftwareContained(String name);
+
+    void ItemAdd(String itemname, String clientName, String salername) throws Exception;
+
+    List<SoftwareRecord> GetSoftwareRecord() throws SQLException;
+
+    List<SoftwareData> GetSoftwareDataByDescription(String description) throws SQLException;
+
+    List<SoftwareData> GetSoftwareDataByFirmname(String firmname) throws SQLException;
+
 
     ResultSet ExecuteQuery(String sql) throws SQLException;
 }

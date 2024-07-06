@@ -29,7 +29,7 @@ public interface ICanSendCommand extends IBelongToArchitecture {
      * @param <T> 返回值类型泛型
      * @param com 命令实例,使用IResCommand接口,返回值类型由泛型自定义
      */
-    default <T> void SendCommand(IResCommand<T> com) {
-        this.GetArchitecture().SendCommand(com);
+    default <T> T SendCommand(IResCommand<T> com) {
+        return this.GetArchitecture().SendCommand(com);
     }
 }

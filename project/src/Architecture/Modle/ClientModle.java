@@ -33,9 +33,9 @@ public class ClientModle
         IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
         String Sql = String.format(
-                "SELECT i.itemname name, s.belong firmname, s.price price, i.date date,i.salername salername " + //
-                        "FROM item i JOIN software s on i.itemname = s.name " + //
-                        "WHERE i.clientname = '%s'",
+                "SELECT i.itemname itemname, s.price price, s.belong belong, i.salername salername, i.date date\n" + //
+                        "FROM item i JOIN software s on i.itemname = s.name\n" + //
+                        "WHERE clientname = '%s'",
                 Name);
         try {
             ResultSet res = dBaseModle.ExecuteQuery(Sql);
@@ -43,18 +43,22 @@ public class ClientModle
 
             while (res.next()) {
                 ItemData itemData = new ItemData();
+                itemData.itemName = res.getString("itemname");
                 itemData.salerName = res.getString("salername");
+                itemData.Belong = res.getString("belong");
+                itemData.Price = res.getInt("price");
                 itemData.Date = res.getString("date");
-                itemData.firmName = res.getString("firmname");
-                itemData.price = res.getInt("price");
-                itemData.itemName = res.getString("name");
-
                 result.add(itemData);
             }
             return result;
         } catch (SQLException e) {
             throw e;
         }
+    }
+
+    @Override
+    public String GetClinetName() {
+        return Name;
     }
 
 }

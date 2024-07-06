@@ -18,7 +18,8 @@ public class SalerLogPanel extends BasePanel {
         panelName = "销售员登录界面";
         commandList = new ArrayList<>(Arrays.asList(
                 "登录",
-                "注册"));
+                "注册",
+                "注销"));
     }
 
     @SuppressWarnings("unused")

@@ -31,23 +31,20 @@ public class SalerModle extends AbstractModle
     public List<ItemData> GetItemData() throws SQLException {
         IDataBaseModle dBaseModle = this.GetModle(IDataBaseModle.class);
 
-        String Sql = String.format(
-                "SELECT i.itemname name, s.belong firmname, s.price price, i.date date,i.clientname clientname " + //
-                        "FROM item i JOIN software s on i.itemname = s.name " + //
-                        "WHERE i.clientname = '%s'",
-                Name);
+        String Sql = String.format
+            ("SELECT itemname, price, belong, clientname, date "+//
+            "FROM item join software on itemname=name WHERE salername = '%s'",Name);
         try {
             ResultSet res = dBaseModle.ExecuteQuery(Sql);
             List<ItemData> result = new ArrayList<ItemData>();
 
             while (res.next()) {
                 ItemData itemData = new ItemData();
+                itemData.itemName = res.getString("itemname");
+                itemData.Price = res.getInt("price");
+                itemData.Belong = res.getString("belong");
                 itemData.clientName = res.getString("clientname");
                 itemData.Date = res.getString("date");
-                itemData.firmName = res.getString("belong");
-                itemData.price = res.getInt("price");
-                itemData.itemName = res.getString("name");
-
                 result.add(itemData);
             }
             return result;

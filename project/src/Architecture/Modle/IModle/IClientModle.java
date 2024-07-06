@@ -9,4 +9,5 @@ import Tool.framework.Interface.IModle;
 public interface IClientModle
         extends IModle {
     List<ItemData> GetItemData() throws SQLException;
+    String GetClinetName();
 }

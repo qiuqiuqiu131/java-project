@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import Architecture.Command.Client.ClientGetItemCommand;
+import Architecture.Command.Client.PurchaseCommand;
+import Architecture.Controller.IController.IInputManager;
+import Architecture.Controller.IController.IPanelManager;
 import Architecture.Event.ClientEnterEvent;
+import Architecture.View.PanelType;
 import Tool.framework.Event.IEventListener;
 
 /**
@@ -40,11 +44,19 @@ public class ClientPanel
 
     @SuppressWarnings("unused")
     private void Command2() {
+        String itemname;
+        String salername;
 
+        IInputManager inputmgr=this.GetController(IInputManager.class);
+        System.out.print("输入购买软件：");
+        itemname=inputmgr.GetInputLine();
+        System.out.print("输入销售员：");
+        salername=inputmgr.GetInputLine();
+        this.SendCommand(new PurchaseCommand(itemname,salername));
     }
 
     @SuppressWarnings("unused")
     private void Command3() {
-
+        this.GetController(IPanelManager.class).OpenPanel(PanelType.SearchSoftWarePanel);
     }
 }

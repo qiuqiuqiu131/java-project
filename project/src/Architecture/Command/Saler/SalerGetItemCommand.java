@@ -23,11 +23,11 @@ public class SalerGetItemCommand extends AbstractCommand {
             if (reslut.size() == 0) {
                 System.out.println("暂无数据");
             } else {
-                System.out.println("软件名\t价格\t生产厂商\t购买日期\t客户");
+                System.out.println("软件名\t价格\t出厂商\t客户\t购买日期");
                 for (ItemData res : reslut) {
                     System.out.println(
-                            String.format("%s\t%s\t%s\t%s\t%s", res.itemName, res.price, res.firmName, res.Date,
-                                    res.clientName));
+                            String.format("%s\t%d\t%s\t%s\t%s",
+                            res.itemName, res.Price, res.Belong, res.clientName, res.Date));
                 }
             }
             System.out.println("-----------------------");

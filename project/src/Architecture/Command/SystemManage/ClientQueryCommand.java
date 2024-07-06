@@ -21,9 +21,13 @@ public class ClientQueryCommand extends AbstractCommand {
 
             inputManager.Space();
             System.out.println("--------客户查询--------");
-            System.out.println("客户名\t购买数量");
-            for (ClientRecord c : list) {
-                System.out.println(String.format("%s\t%s", c.Name, c.SaleCount));
+            if (list.size() == 0) {
+                System.out.println("暂无数据");
+            } else {
+                System.out.println("客户名\t购买数量");
+                for (ClientRecord c : list) {
+                    System.out.println(String.format("%s\t%s", c.Name, c.SaleCount));
+                }
             }
             System.out.println("-----------------------");
             inputManager.GetInputLine();

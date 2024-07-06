@@ -5,7 +5,7 @@ import Tool.framework.Interface.IController;
 
 /**
  * 控制器基类
- * 定义一个控制器是必须继承此基类
+ * 定义一个控制器时必须继承此基类
  * 
  * @author 洪秋阳
  */

@@ -13,11 +13,10 @@ import Tool.framework.Interface.Functional.ISetArchitecture;
  * @author 洪秋阳
  */
 public interface IModle
-        extends ISetArchitecture,
-        IGetModle,
-        ICanSendEvent,
-        ICanRegisterEvent,
-        IGetUtility,
-        ICanInit {
-
+                extends ISetArchitecture, // 设置所处架构
+                IGetModle, // 允许获取模型
+                ICanSendEvent, // 允许发送事件
+                ICanRegisterEvent, // 允许注册事件
+                IGetUtility, // 允许获取工具
+                ICanInit {
 }

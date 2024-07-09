@@ -29,7 +29,7 @@ public class ClientLogoutCommand extends AbstractCommand {
         } else {
             ClientData data = dBaseModle.GetClient(Name);
             String decodePwd = this.GetUtility(IEncodeUtility.class).decode(data.Password, "加密");
-            if (data.Password.equals(decodePwd)) {
+            if (Password.equals(decodePwd)) {
                 dBaseModle.ClientLogout(Name);
                 inputMgr.PrintLine(PrintGrade.Imforation, "客户注销成功");
             } else {

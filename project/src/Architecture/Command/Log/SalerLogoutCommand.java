@@ -30,7 +30,7 @@ public class SalerLogoutCommand extends AbstractCommand {
         } else {
             SalerData data = dBaseModle.GetSaler(Name);
             String decodePwd = this.GetUtility(IEncodeUtility.class).decode(data.Password, "加密");
-            if (data.Password.equals(decodePwd)) {
+            if (Password.equals(decodePwd)) {
                 dBaseModle.SalerLogout(Name);
                 inputMgr.PrintLine(PrintGrade.Imforation, "销售员注销成功");
             } else {

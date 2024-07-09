@@ -15,13 +15,12 @@ import Tool.framework.Interface.Functional.ISetArchitecture;
  * @author 洪秋阳
  */
 public interface IController
-                extends ISetArchitecture,
-                IGetController,
-                IGetModle,
-                ICanRegisterEvent,
-                ICanSendEvent,
-                ICanSendCommand,
-                IGetUtility,
-                ICanInit {
-
+        extends ISetArchitecture, // 设置所处架构
+        IGetController, // 允许获取控制器
+        IGetModle, // 允许获取模型
+        IGetUtility, // 允许获取工具
+        ICanRegisterEvent, // 允许注册事件
+        ICanSendEvent, // 允许发送事件
+        ICanSendCommand, // 允许发送命令
+        ICanInit {
 }

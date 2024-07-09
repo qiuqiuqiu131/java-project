@@ -20,7 +20,9 @@ import Tool.Database.Class.SoftwareData;
 import Tool.Database.Class.SoftwareRecord;
 import Tool.framework.Abstract.AbstractModle;
 
-public class DataBaseModle extends AbstractModle implements IDataBaseModle {
+public class DataBaseModle
+        extends AbstractModle
+        implements IDataBaseModle {
     private DBConnection dbConnection;
 
     public DataBaseModle() {
@@ -219,7 +221,7 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
 
     @Override
     public List<SoftwareData> GetSoftwareDataByDescription(String description) throws SQLException {
-        String sql = String.format("select * from software where description='%s'",description);
+        String sql = String.format("select * from software where description='%s'", description);
         List<SoftwareData> list = new ArrayList<SoftwareData>();
         ResultSet res = ExecuteQuery(sql);
         while (res.next()) {
@@ -235,7 +237,7 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
 
     @Override
     public List<SoftwareData> GetSoftwareDataByFirmname(String firmname) throws SQLException {
-        String sql = String.format("select * from software where belong='%s'",firmname);
+        String sql = String.format("select * from software where belong='%s'", firmname);
         List<SoftwareData> list = new ArrayList<SoftwareData>();
         ResultSet res = ExecuteQuery(sql);
         while (res.next()) {
@@ -248,6 +250,7 @@ public class DataBaseModle extends AbstractModle implements IDataBaseModle {
         }
         return list;
     }
+
     @Override
     public ResultSet ExecuteQuery(String sql) throws SQLException {
         Statement statement = dbConnection.GetConn().createStatement();

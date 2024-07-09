@@ -5,6 +5,7 @@ import Architecture.Controller.IController.IInputManager;
 import Architecture.Controller.IController.IPanelManager;
 import Architecture.Event.ClientEnterEvent;
 import Architecture.Modle.IModle.IDataBaseModle;
+import Architecture.Utility.IEncodeUtility;
 import Architecture.View.PanelType;
 import Tool.Database.Class.ClientData;
 import Tool.framework.Abstract.AbstractCommand;
@@ -30,9 +31,8 @@ public class ClientLoginCommand extends AbstractCommand {
             inputMgr.PrintLine(PrintGrade.Error, "客户不存在,请先注册");
         } else {
             ClientData data = dBaseModle.GetClient(Name);
-            // String decodePwd =
-            // this.GetUtility(IEncodeUtility.class).decode(data.Password, "加密");
-            if (Password.equals(data.Password)) {
+            String decodePwd = this.GetUtility(IEncodeUtility.class).decode(data.Password, "加密");
+            if (Password.equals(decodePwd)) {
                 this.SendEvent(new ClientEnterEvent(Name));
 
                 inputMgr.PrintLine(PrintGrade.Imforation, "客户登录成功");
